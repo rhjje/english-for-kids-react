@@ -1,4 +1,5 @@
 import React from 'react';
+import { countingStatistics } from '../statistics/statistics';
 import './card.scss';
 
 export default class Card extends React.Component {
@@ -20,6 +21,7 @@ export default class Card extends React.Component {
 
   handleClickCard(event) {
     if (!event.target.classList.contains('reverse-button') && !this.props.gameMode) {
+      countingStatistics(`${this.props.word}`, 'clicks');
       this.audio.play();
     }
   }

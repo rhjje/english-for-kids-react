@@ -3,7 +3,10 @@ import { withRouter } from "react-router-dom";
 import Card from './card';
 import GameMode from './game-mode';
 import ButtonPlay from './button-play';
+import { countingStatistics } from '../statistics/statistics';
 import data from '../../assets/JSON/cards.json';
+import star from '../../assets/icons/star-win.svg';
+import emptyStar from '../../assets/icons/star.svg';
 import './game-field.scss';
 
 class GameField extends React.Component {
@@ -43,13 +46,13 @@ class GameField extends React.Component {
     const words = [];
     cards.forEach((card) => {
       words.push(card.getAttribute('data-name'));
-      // console.log(card.getAttribute('data-name'));
     });
     words.sort(() => Math.random() - 0.5);
 
     let currentWord = 0;
     let mistakes = 0;
     const wordsUsed = [];
+
     const sayWord = () => {
       this.currentAudio = new Audio(`./sounds/${words[currentWord]}.mp3`);
       this.currentAudio.play();
@@ -64,9 +67,15 @@ class GameField extends React.Component {
           const activeCard = document.querySelector(`.card-word:nth-child(${i + 1})`);
           activeCard.classList.remove('active-card');
           correct.play();
+          countingStatistics(`${words[currentWord]}`, 'correct');
 
           currentWord += 1;
           wordsUsed.push(card.getAttribute('data-name'));
+
+          const stars = document.createElement('img');
+          stars.src = star;
+          document.querySelector('.game-score').append(stars);
+
           if (currentWord < words.length) {
             setTimeout(sayWord, 500);
           } else {
@@ -82,7 +91,11 @@ class GameField extends React.Component {
             }, 1000);
           }
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
+          const stars = document.createElement('img');
+          stars.src = emptyStar;
+          document.querySelector('.game-score').append(stars);
           error.play();
+          countingStatistics(`${words[currentWord]}`, 'wrong');
           mistakes += 1;
         }
       });
@@ -126,6 +139,7 @@ class GameField extends React.Component {
           onClick={this.handleClickPlay}
           /> 
           : ''}
+        <div className="game-score"></div>
       </div>
       );
   }

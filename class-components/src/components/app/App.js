@@ -6,23 +6,25 @@ import GameField from '../game-field/game-field';
 import Footer from '../footer/footer';
 import FinalPageWin from '../final-page/final-page-win';
 import FinalPageGameOver from '../final-page/final-page-game-over';
+import Statistics from '../statistics/statistics';
 
 import './app.scss';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Router>
         <Header/>
           <Switch>
-          <Route exact path="/final-page-game-over" component={FinalPageGameOver}/>
+            <Route exact path="/statistics" component={Statistics}/>
+            <Route exact path="/final-page-game-over" component={FinalPageGameOver}/>
             <Route exact path="/final-page-win" component={FinalPageWin}/>
             <Route path="/:id" component={GameField}/>
             <Route exact path="/" component={Home}/>
           </Switch>
           <Footer/>
       </Router>
-    </div>
+    </>
   );
 }
 
