@@ -64,13 +64,26 @@ const formingListWords = () => {
   localStorage.setItem('difficult-words', `${JSON.stringify(array)}`);
 };
 
+const sortTable = (field, direction) => {
+  const data = JSON.parse(localStorage.getItem('data'));
+  if (direction === 'back') {
+    data.sort((a, b) => (a[field] > b[field] ? -1 : 1));
+  } else {
+    data.sort((a, b) => (a[field] > b[field] ? 1 : -1));
+  }
+  localStorage.setItem('data', `${JSON.stringify(data)}`);
+};
+
+sortTable('word', 'forward');
+
 export default class Statistics extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickReset = this.handleClickReset.bind(this);
+    this.handleClickTh = this.handleClickTh.bind(this);
   }
 
-  handleClick() {
+  handleClickReset() {
     const data = JSON.parse(localStorage.getItem('data'));
     const resetArray = data.map((item) => ({
       word: item.word,
@@ -87,23 +100,72 @@ export default class Statistics extends React.Component {
     this.forceUpdate();
   }
 
+  handleClickTh(event) {
+    const heads = document.querySelectorAll('th');
+    heads.forEach((head) => {
+      if (head.innerText.match(/↓|↑/)) {
+        head.innerText = head.innerText.substring(2);
+      }
+    });
+
+    sortTable(event.target.getAttribute('data-value'), event.target.getAttribute('data-direction'));
+
+    let arrow;
+    if (event.target.getAttribute('data-direction') === 'back') {
+      arrow = '&uarr;';
+      event.target.setAttribute('data-direction', 'forward');
+    } else {
+      arrow = '&darr;';
+      event.target.setAttribute('data-direction', 'back');
+    }
+
+    let title;
+    switch (event.target.getAttribute('data-value')) {
+      case 'word':
+        title = document.querySelector('th:first-child');
+        break;
+      case 'translation':
+        title = document.querySelector('th:nth-child(2)');
+        break;
+      case 'category':
+        title = document.querySelector('th:nth-child(3)');
+        break;
+      case 'clicks':
+        title = document.querySelector('th:nth-child(4)');
+        break;
+      case 'correct':
+        title = document.querySelector('th:nth-child(5)');
+        break;
+      case 'wrong':
+        title = document.querySelector('th:nth-child(6)');
+        break;
+      case 'percent':
+        title = document.querySelector('th:last-child');
+        break;
+      default:
+        break;
+    }
+    title.innerHTML = `${arrow} ${title.innerHTML}`;
+    this.forceUpdate();
+  }
+
   render() {
     formingListWords();
     const dataForTable = JSON.parse(localStorage.getItem('data'));
     return (
       <div className="statistics">
-        <StatisticsButtons onClickReset={this.handleClick} />
+        <StatisticsButtons onClickReset={this.handleClickReset} />
         <div className="statistics-table">
           <table className="statistics-table__header">
             <thead>
-              <tr>
-                <th>↓ Word</th>
-                <th>Translation</th>
-                <th>Category</th>
-                <th>Clicks</th>
-                <th>Correct</th>
-                <th>Wrong</th>
-                <th>% errors</th>
+              <tr onClick={this.handleClickTh}>
+                <th data-value="word" data-direction="back">↓ Word</th>
+                <th data-value="translation" data-direction="forward">Translation</th>
+                <th data-value="category" data-direction="forward">Category</th>
+                <th data-value="clicks" data-direction="forward">Clicks</th>
+                <th data-value="correct" data-direction="forward">Correct</th>
+                <th data-value="wrong" data-direction="forward">Wrong</th>
+                <th data-value="percent" data-direction="forward">% errors</th>
               </tr>
             </thead>
           </table>
