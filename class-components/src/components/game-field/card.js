@@ -16,7 +16,7 @@ export default class Card extends React.Component {
   }
 
   handleClickButton() {
-    this.setState({cardFlipped: true});
+    this.setState({ cardFlipped: true });
   }
 
   handleClickCard(event) {
@@ -27,7 +27,7 @@ export default class Card extends React.Component {
   }
 
   mouseLeave() {
-    this.setState({cardFlipped: false});
+    this.setState({ cardFlipped: false });
   }
 
   render() {
@@ -44,20 +44,20 @@ export default class Card extends React.Component {
     }
     return (
       <div className="card-word active-card" onMouseLeave={this.mouseLeave}>
-        <div className={"card-word__front" + classFront} data-number="1" data-name={word} onClick={this.handleClickCard}>
-          <div className={"card-word__front-image" + classImage}>
+        <div className={`card-word__front${classFront}`} data-number="1" data-name={word} onClick={this.handleClickCard}>
+          <div className={`card-word__front-image${classImage}`}>
             <img src={image} alt={word} />
           </div>
           <div className="card-word__front-name">{word}</div>
-          <div className="reverse-button" data-number="1" onClick={this.handleClickButton}></div>
+          <div className="reverse-button" data-number="1" onClick={this.handleClickButton} />
         </div>
-        <div className={"card-word__back" + classBack}>
+        <div className={`card-word__back${classBack}`}>
           <div className="card-word__back-image">
             <img src={image} alt={translation} />
           </div>
           <div className="card-word__back-name">{translation}</div>
         </div>
-        </div>
+      </div>
     );
   }
 }

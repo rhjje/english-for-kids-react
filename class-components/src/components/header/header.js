@@ -15,29 +15,31 @@ export default class Header extends React.Component {
   }
 
   handleClick() {
-    this.setState({menuOpen: !this.state.menuOpen});
+    this.setState((prevState) => ({
+      menuOpen: !prevState.menuOpen
+    }));
   }
 
   render() {
-  let classBg = 'burger-menu__bg burger-menu__bg_disabled';
-  if (this.state.menuOpen) {
-    classBg = 'burger-menu__bg';
-  }
+    let classBg = 'burger-menu__bg burger-menu__bg_disabled';
+    if (this.state.menuOpen) {
+      classBg = 'burger-menu__bg';
+    }
     return (
       <header className="header">
-        <BurgerButton 
-          onClickButton={this.handleClick} 
-          menuOpen={this.state.menuOpen} 
+        <BurgerButton
+          onClickButton={this.handleClick}
+          menuOpen={this.state.menuOpen}
         />
         <Link to="/" className="title-wrapper">
           <h1 className="title">English for Kids</h1>
-        </Link> 
-        <BurgerMenu 
-          menuState={this.state.menuOpen} 
+        </Link>
+        <BurgerMenu
+          menuState={this.state.menuOpen}
           closeMenu={this.handleClick}
         />
-        <div className={classBg} onClick={this.handleClick}></div>
+        <div className={classBg} onClick={this.handleClick} />
       </header>
-    ); 
+    );
   }
 }

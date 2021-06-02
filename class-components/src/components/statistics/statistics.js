@@ -1,14 +1,17 @@
-import data from '../../assets/JSON/cards.json';
+import React from 'react';
+import cards from '../../assets/JSON/cards.json';
 import './statistics.scss';
 import StatisticsButtons from './statistics-buttons';
 
 const setLocalStorage = () => {
   const array = [];
-  for (let key in data) {
-    array.push(data[key]);
+  for (const key in cards) {
+    if (Object.prototype.hasOwnProperty.call(cards, key)) {
+      array.push(cards[key]);
+    }
   }
   const flatArray = array.flat();
-  flatArray.sort((a, b) => (a.word > b.word ? 1 : -1))
+  flatArray.sort((a, b) => (a.word > b.word ? 1 : -1));
   const statistics = [];
   flatArray.forEach((item) => {
     const currentObj = {
@@ -19,7 +22,7 @@ const setLocalStorage = () => {
       correct: 0,
       wrong: 0,
       percent: 0,
-      image: item.image,
+      image: item.image
     };
     statistics.push(currentObj);
   });
@@ -28,27 +31,27 @@ const setLocalStorage = () => {
 
 const countingStatistics = (word, category) => {
   const data = JSON.parse(localStorage.getItem('data'));
-    data.forEach((item) => {
-      if (item.word === word) {
-        switch (category) {
-          case 'clicks':
-            item.clicks += 1;
-            break;
-          case 'correct':
-            item.correct += 1;
-            break;
-          case 'wrong':
-            item.wrong += 1;
-            break;
-          default:
-            break;
-        }
-        if (item.wrong + item.correct > 0) {
-          item.percent = +((item.wrong * 100) / (item.wrong + item.correct)).toFixed(1);
-        }
+  data.forEach((item) => {
+    if (item.word === word) {
+      switch (category) {
+        case 'clicks':
+          item.clicks += 1;
+          break;
+        case 'correct':
+          item.correct += 1;
+          break;
+        case 'wrong':
+          item.wrong += 1;
+          break;
+        default:
+          break;
       }
-    });
-    localStorage.setItem('data', `${JSON.stringify(data)}`);
+      if (item.wrong + item.correct > 0) {
+        item.percent = +((item.wrong * 100) / (item.wrong + item.correct)).toFixed(1);
+      }
+    }
+  });
+  localStorage.setItem('data', `${JSON.stringify(data)}`);
 };
 
 const Statistics = () => {
@@ -74,20 +77,20 @@ const Statistics = () => {
           <table className="table">
             {dataForTable.map((item) => (
               <tbody key={item.word}>
-              <tr>
-                <td>{item.word}</td>
-                <td>{item.translation}</td>
-                <td>{item.category}</td>
-                <td>{item.clicks}</td>
-                <td>{item.correct}</td>
-                <td>{item.wrong}</td>
-                <td>{item.percent}</td>
-              </tr>
-            </tbody>
+                <tr>
+                  <td>{item.word}</td>
+                  <td>{item.translation}</td>
+                  <td>{item.category}</td>
+                  <td>{item.clicks}</td>
+                  <td>{item.correct}</td>
+                  <td>{item.wrong}</td>
+                  <td>{item.percent}</td>
+                </tr>
+              </tbody>
             ))}
           </table>
         </div>
-      </div>   
+      </div>
     </div>
   );
 };

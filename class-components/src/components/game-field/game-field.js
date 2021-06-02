@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import Card from './card';
 import GameMode from './game-mode';
 import ButtonPlay from './button-play';
@@ -14,23 +14,33 @@ class GameField extends React.Component {
     super(props);
     this.state = {
       gameMode: false,
-      buttonRepeat: false,
-      gameOn: false
+      buttonRepeat: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClickPlay = this.handleClickPlay.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        gameMode: false,
+        buttonRepeat: false
+      });
+    }
+  }
+
   handleChange() {
-    this.setState({gameMode: !this.state.gameMode});
+    this.setState((prevState) => ({
+      gameMode: !prevState.gameMode
+    }));
   }
 
   handleClickPlay() {
     if (!this.state.buttonRepeat) {
       this.setState({
-        buttonRepeat: true,
-        gameOn: true
+        buttonRepeat: true
       }, () => this.playGame());
     } else {
       this.currentAudio.play();
@@ -102,46 +112,39 @@ class GameField extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
-      this.setState({
-        gameMode: false,
-        buttonRepeat: false
-      });
-    }
-  }
-
   render() {
     const cards = data[this.props.match.params.id];
     sessionStorage.setItem('page', `${this.props.match.params.id}`);
 
     return (
       <div className="game-field">
-        <GameMode 
-          gameMode={this.state.gameMode} 
-          handleChange={this.handleChange} 
+        <GameMode
+          gameMode={this.state.gameMode}
+          handleChange={this.handleChange}
           key={this.props.match.params.id}
         />
         <div className="cards">
           {cards.map((card) => (
-            <Card 
-              word={card.word} 
-              translation={card.translation} 
-              image={card.image} 
+            <Card
+              word={card.word}
+              translation={card.translation}
+              image={card.image}
               key={card.word}
               gameMode={this.state.gameMode}
             />
           ))}
         </div>
-        {this.state.gameMode 
-          ? <ButtonPlay 
-          buttonRepeat={this.state.buttonRepeat} 
-          onClick={this.handleClickPlay}
-          /> 
+        {this.state.gameMode
+          ? (
+            <ButtonPlay
+              buttonRepeat={this.state.buttonRepeat}
+              onClick={this.handleClickPlay}
+            />
+          )
           : ''}
-        <div className="game-score"></div>
+        <div className="game-score" />
       </div>
-      );
+    );
   }
 }
 

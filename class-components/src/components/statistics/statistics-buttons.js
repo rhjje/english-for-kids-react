@@ -1,12 +1,11 @@
+import React from 'react';
 import './statistics-buttons.scss';
 
-const StatisticsButtons = () => {
-  return (
-    <div className="statistics-buttons">
-      <button className="repeat-button">Repeat difficult words</button>
-      <button className="reset-button">Reset</button>
-    </div>
-  );
-};
+const StatisticsButtons = () => (
+  <div className="statistics-buttons">
+    <button type="button" className="repeat-button">Repeat difficult words</button>
+    <button type="button" className="reset-button">Reset</button>
+  </div>
+);
 
 export default StatisticsButtons;
