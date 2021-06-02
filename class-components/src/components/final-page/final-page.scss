@@ -1,0 +1,19 @@
+.final-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.final-page__title {
+  margin: 35px 0 50px;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.final-page__buttons {
+  width: 290px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}

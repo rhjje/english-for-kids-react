@@ -1,0 +1,31 @@
+.game-field {
+  margin: 0 auto;
+  padding-top: 30px;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 80px;
+  animation-name: display;
+  animation-duration: 1s;
+}
+
+.game-score {
+  height: 50px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  overflow: hidden;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
