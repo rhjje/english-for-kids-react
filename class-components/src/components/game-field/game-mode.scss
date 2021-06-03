@@ -1,10 +1,9 @@
 .mode {
   display: flex;
   align-items: center;
-  top: 35px;
 }
 
-.mode__train, 
+.mode__train,
 .mode__game {
   font-size: 2.8rem;
   font-weight: 700;
@@ -13,7 +12,7 @@
   transition: .5s;
 }
 
-.mode__train_active, 
+.mode__train_active,
 .mode__game_active {
   transition: .5s;
   opacity: 1;
@@ -56,15 +55,15 @@
   transition: .5s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: rgb(196, 63, 90);
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px rgb(196, 63, 90);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);

@@ -74,7 +74,9 @@ const sortTable = (field, direction) => {
   localStorage.setItem('data', `${JSON.stringify(data)}`);
 };
 
-sortTable('word', 'forward');
+if (localStorage.getItem('data')) {
+  sortTable('word', 'forward');
+}
 
 export default class Statistics extends React.Component {
   constructor(props) {

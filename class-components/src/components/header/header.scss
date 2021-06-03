@@ -31,3 +31,24 @@
   opacity: 0;
   z-index: -1;
 }
+
+@media screen and (max-height: 870px) {
+  .title {
+    top: 10px;
+    font-size: 4.6rem;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .title {
+    left: 110px;
+    top: 15px;
+    font-size: 3rem;
+  }
+}

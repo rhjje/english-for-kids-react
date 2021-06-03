@@ -13,11 +13,23 @@
   border: 1px solid rgb(196, 63, 90);
   transition: .3s;
   outline: 5px solid rgba(209, 204, 204, 0.5);
+
   &:hover {
     transition: .3s;
     background-color: rgb(196, 63, 90);
   }
+
   &:active {
     transform: scale(0.8);
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .new-game,
+  .main-menu {
+    width: 100px;
+    height: 35px;
+    font-size: 2.2rem;
+    line-height: 32px;
   }
 }
