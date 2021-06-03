@@ -8,6 +8,7 @@ import data from '../../assets/JSON/cards.json';
 import star from '../../assets/icons/star-win.svg';
 import emptyStar from '../../assets/icons/star.svg';
 import './game-field.scss';
+import { MainMenu } from '../final-page/buttons-finish';
 
 class GameField extends React.Component {
   constructor(props) {
@@ -113,9 +114,23 @@ class GameField extends React.Component {
   }
 
   render() {
-    const cards = data[this.props.match.params.id];
+    let cards;
+    if (this.props.match.params.id === 'repeat-difficult-words') {
+      cards = JSON.parse(localStorage.getItem('difficult-words'));
+    } else {
+      cards = data[this.props.match.params.id];
+    }
+    // const cards = data[this.props.match.params.id];
     sessionStorage.setItem('page', `${this.props.match.params.id}`);
 
+    if (cards.length === 0) {
+      return (
+        <div className="notification">
+          <div className="error-message">There are no words yet :)</div>
+          <MainMenu />
+        </div>
+      );
+    }
     return (
       <div className="game-field">
         <GameMode

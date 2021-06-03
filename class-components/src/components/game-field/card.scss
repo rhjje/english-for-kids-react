@@ -93,23 +93,64 @@
   transform: rotateY(360deg);
 }
 
-// @media screen and (max-width: 720px) {
-//   .card-word {
-//     margin: 25px 0;
-//   }
-// }
+@media screen and (max-height: 700px) {
+  .card-word {
+    width: 190px;
+    height: 200px;
+    border-radius: 20px;
+  }
 
-// @media screen and (max-width: 400px) {
-//   .card-word {
-//     width: 250px;
-//   }
-//   .card-word__front-image, .card-word__back-image {
-//     img {
-//       width: 100%;
-//       height: 200px;
-//     }
-//   }
-//   .reverse-button {
-//     left: 195px;
-//   }
-// }
+  .card-word__front, .card-word__back {
+    border-radius: 20px;
+  }
+
+  .card-word__front-image, .card-word__back-image {
+    height: 150px;
+  }
+
+  .card-word__front-image_active {
+    height: 200px;
+  }
+
+  .card-word__front-name, .card-word__back-name {
+    font-size: 2.6rem;
+  }
+
+  .reverse-button {
+    width: 30px;
+    height: 30px;
+    top: 160px;
+    left: 140px;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .card-word {
+    width: 130px;
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  .card-word__front, .card-word__back {
+    border-radius: 10px;
+  }
+
+  .card-word__front-image, .card-word__back-image {
+    height: 115px;
+  }
+
+  .card-word__front-image_active {
+    height: 150px;
+  }
+
+  .card-word__front-name, .card-word__back-name {
+    font-size: 2rem;
+  }
+
+  .reverse-button {
+    width: 25px;
+    height: 25px;
+    top: 120px;
+    left: 95px;
+  }
+}
