@@ -7,7 +7,8 @@ export default class Card extends React.Component {
     super(props);
     this.audio = new Audio(`./sounds/${this.props.word}.mp3`);
     this.state = {
-      cardFlipped: false
+      cardFlipped: false,
+      rotation: `rotate(${(Math.random() * (3 - (-3)) - 3).toFixed(1)}deg)`
     };
 
     this.handleClickButton = this.handleClickButton.bind(this);
@@ -43,7 +44,7 @@ export default class Card extends React.Component {
       classImage = ' card-word__front-image_active';
     }
     return (
-      <div className="card-word active-card" onMouseLeave={this.mouseLeave}>
+      <div className="card-word active-card" onMouseLeave={this.mouseLeave} style={{ transform: `${this.state.rotation}` }}>
         <div className={`card-word__front${classFront}`} data-number="1" data-name={word} onClick={this.handleClickCard}>
           <div className={`card-word__front-image${classImage}`}>
             <img src={image} alt={word} />
