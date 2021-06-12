@@ -1,0 +1,62 @@
+.button-play {
+  width: 120px;
+  height: 40px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  background-color: whitesmoke;
+  border: 1px solid rgb(196, 63, 90);
+  transition: .3s;
+  outline: 5px solid rgba(209, 204, 204, 0.5);
+  &:hover {
+    transition: .3s;
+    cursor: pointer;
+    background-color: rgb(196, 63, 90);
+  }
+  &:active {
+    transform: scale(0.8);
+  }
+}
+
+.button-play_repeat {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: url('../../assets/icons/repeat.svg') no-repeat 50% 50% rgb(196, 63, 90);
+  background-size: 40px;
+  transition: .4s;
+  outline: none;
+  font-size: 0;
+}
+
+@media screen and (max-height: 850px) {
+  .button-play {
+    margin: 10px 0 0;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .button-play {
+    width: 100px;
+    height: 35px;
+    outline: 4px solid rgba(209, 204, 204, 0.5);
+    font-size: 2.2rem;
+    margin-top: 20px;
+  }
+
+  .button-play_repeat {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url('../../assets/icons/repeat.svg') no-repeat 50% 50% rgb(196, 63, 90);
+    background-size: 30px;
+    transition: .4s;
+    outline: none;
+    font-size: 0;
+  }
+
+  @media screen and (max-height: 550px) {
+    .button-play {
+      margin-top: 5px;
+    }
+  }
+}
