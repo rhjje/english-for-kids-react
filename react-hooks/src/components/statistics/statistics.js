@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import cards from '../../assets/JSON/cards.json';
 import './statistics.scss';
 import StatisticsButtons from './statistics-buttons';
@@ -78,14 +78,10 @@ if (localStorage.getItem('data')) {
   sortTable('word', 'forward');
 }
 
-export default class Statistics extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClickReset = this.handleClickReset.bind(this);
-    this.handleClickTh = this.handleClickTh.bind(this);
-  }
+const Statistics = () => {
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  handleClickReset() {
+  const handleClickReset = () => {
     const data = JSON.parse(localStorage.getItem('data'));
     const resetArray = data.map((item) => ({
       word: item.word,
@@ -99,10 +95,10 @@ export default class Statistics extends React.Component {
     }));
     localStorage.setItem('data', `${JSON.stringify(resetArray)}`);
     localStorage.removeItem('difficult-words');
-    this.forceUpdate();
-  }
+    forceUpdate();
+  };
 
-  handleClickTh(event) {
+  const handleClickTh = (event) => {
     const heads = document.querySelectorAll('th');
     heads.forEach((head) => {
       if (head.innerText.match(/↓|↑/)) {
@@ -148,50 +144,50 @@ export default class Statistics extends React.Component {
         break;
     }
     title.innerHTML = `${arrow} ${title.innerHTML}`;
-    this.forceUpdate();
-  }
+    forceUpdate();
+  };
 
-  render() {
-    formingListWords();
-    const dataForTable = JSON.parse(localStorage.getItem('data'));
-    return (
-      <div className="statistics">
-        <StatisticsButtons onClickReset={this.handleClickReset} />
-        <div className="statistics-table">
-          <table className="statistics-table__header">
-            <thead>
-              <tr onClick={this.handleClickTh}>
-                <th data-value="word" data-direction="back">↓ Word</th>
-                <th data-value="translation" data-direction="forward">Translation</th>
-                <th data-value="category" data-direction="forward">Category</th>
-                <th data-value="clicks" data-direction="forward">Clicks</th>
-                <th data-value="correct" data-direction="forward">Correct</th>
-                <th data-value="wrong" data-direction="forward">Wrong</th>
-                <th data-value="percent" data-direction="forward">% errors</th>
-              </tr>
-            </thead>
+  formingListWords();
+  const dataForTable = JSON.parse(localStorage.getItem('data'));
+
+  return (
+    <div className="statistics">
+      <StatisticsButtons onClickReset={handleClickReset} />
+      <div className="statistics-table">
+        <table className="statistics-table__header">
+          <thead>
+            <tr onClick={handleClickTh}>
+              <th data-value="word" data-direction="back">↓ Word</th>
+              <th data-value="translation" data-direction="forward">Translation</th>
+              <th data-value="category" data-direction="forward">Category</th>
+              <th data-value="clicks" data-direction="forward">Clicks</th>
+              <th data-value="correct" data-direction="forward">Correct</th>
+              <th data-value="wrong" data-direction="forward">Wrong</th>
+              <th data-value="percent" data-direction="forward">% errors</th>
+            </tr>
+          </thead>
+        </table>
+        <div className="statistics-table__body">
+          <table className="table">
+            {dataForTable.map((item) => (
+              <tbody key={item.word}>
+                <tr>
+                  <td>{item.word}</td>
+                  <td>{item.translation}</td>
+                  <td>{item.category}</td>
+                  <td>{item.clicks}</td>
+                  <td>{item.correct}</td>
+                  <td>{item.wrong}</td>
+                  <td>{item.percent}</td>
+                </tr>
+              </tbody>
+            ))}
           </table>
-          <div className="statistics-table__body">
-            <table className="table">
-              {dataForTable.map((item) => (
-                <tbody key={item.word}>
-                  <tr>
-                    <td>{item.word}</td>
-                    <td>{item.translation}</td>
-                    <td>{item.category}</td>
-                    <td>{item.clicks}</td>
-                    <td>{item.correct}</td>
-                    <td>{item.wrong}</td>
-                    <td>{item.percent}</td>
-                  </tr>
-                </tbody>
-              ))}
-            </table>
-          </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
+export default Statistics;
 export { countingStatistics, setLocalStorage };

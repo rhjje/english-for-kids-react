@@ -1,5 +1,4 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Card from './card';
 import GameMode from './game-mode';
 import ButtonPlay from './button-play';
@@ -10,45 +9,17 @@ import emptyStar from '../../assets/icons/star.svg';
 import './game-field.scss';
 import { MainMenu } from '../final-page/buttons-finish';
 
-class GameField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      gameMode: false,
-      buttonRepeat: false
-    };
+const GameField = (props) => {
+  const [gameMode, setGameMode] = useState(false);
+  const [repeat, setRepeat] = useState(false);
+  const [audio, setAudio] = useState();
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClickPlay = this.handleClickPlay.bind(this);
-  }
+  useEffect(() => {
+    setGameMode(false);
+    setRepeat(false);
+  }, [props.match.params.id]);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        gameMode: false,
-        buttonRepeat: false
-      });
-    }
-  }
-
-  handleChange() {
-    this.setState((prevState) => ({
-      gameMode: !prevState.gameMode
-    }));
-  }
-
-  handleClickPlay() {
-    if (!this.state.buttonRepeat) {
-      this.setState({
-        buttonRepeat: true
-      }, () => this.playGame());
-    } else {
-      this.currentAudio.play();
-    }
-  }
-
-  playGame() {
+  const playGame = () => {
     const correct = new Audio('./sounds/correct.mp3');
     const error = new Audio('./sounds/error.mp3');
     const success = new Audio('./sounds/success.mp3');
@@ -65,8 +36,9 @@ class GameField extends React.Component {
     const wordsUsed = [];
 
     const sayWord = () => {
-      this.currentAudio = new Audio(`./sounds/${words[currentWord]}.mp3`);
-      this.currentAudio.play();
+      const currentAudio = new Audio(`./sounds/${words[currentWord]}.mp3`);
+      currentAudio.play();
+      setAudio(currentAudio);
     };
 
     sayWord();
@@ -94,10 +66,10 @@ class GameField extends React.Component {
               if (mistakes > 0) {
                 failure.play();
                 sessionStorage.setItem('mistakes', `${mistakes}`);
-                this.props.history.push('/final-page-game-over');
+                props.history.push('/final-page-game-over');
               } else {
                 success.play();
-                this.props.history.push('/final-page-win');
+                props.history.push('/final-page-win');
               }
             }, 1000);
           }
@@ -111,56 +83,62 @@ class GameField extends React.Component {
         }
       });
     });
-  }
+  };
 
-  render() {
-    let cards;
-    if (this.props.match.params.id === 'repeat-difficult-words') {
-      cards = JSON.parse(localStorage.getItem('difficult-words'));
+  const handleClickPlay = () => {
+    if (!repeat) {
+      setRepeat(true);
+      playGame();
     } else {
-      cards = data[this.props.match.params.id];
+      audio.play();
     }
-    // const cards = data[this.props.match.params.id];
-    sessionStorage.setItem('page', `${this.props.match.params.id}`);
+  };
 
-    if (cards.length === 0) {
-      return (
-        <div className="notification">
-          <div className="error-message">There are no words yet :)</div>
-          <MainMenu />
-        </div>
-      );
-    }
+  let cards;
+  if (props.match.params.id === 'repeat-difficult-words') {
+    cards = JSON.parse(localStorage.getItem('difficult-words'));
+  } else {
+    cards = data[props.match.params.id];
+  }
+  sessionStorage.setItem('page', `${props.match.params.id}`);
+
+  if (cards.length === 0) {
     return (
-      <div className="game-field">
-        <GameMode
-          gameMode={this.state.gameMode}
-          handleChange={this.handleChange}
-          key={this.props.match.params.id}
-        />
-        <div className="cards">
-          {cards.map((card) => (
-            <Card
-              word={card.word}
-              translation={card.translation}
-              image={card.image}
-              key={card.word}
-              gameMode={this.state.gameMode}
-            />
-          ))}
-        </div>
-        {this.state.gameMode
-          ? (
-            <ButtonPlay
-              buttonRepeat={this.state.buttonRepeat}
-              onClick={this.handleClickPlay}
-            />
-          )
-          : ''}
-        <div className="game-score" />
+      <div className="notification">
+        <div className="error-message">There are no words yet :)</div>
+        <MainMenu />
       </div>
     );
   }
-}
+  return (
+    <div className="game-field">
+      <GameMode
+        gameMode={gameMode}
+        handleChange={() => setGameMode(!gameMode)}
+        key={props.match.params.id}
+      />
+      <div className="cards">
+        {cards.map((card) => (
+          <Card
+            word={card.word}
+            translation={card.translation}
+            image={card.image}
+            key={card.word}
+            gameMode={gameMode}
+          />
+        ))}
+      </div>
+      {gameMode
+        ? (
+          <ButtonPlay
+            buttonRepeat={repeat}
+            onClick={handleClickPlay}
+          />
+        )
+        : ''}
+      <div className="game-score" />
+    </div>
+  );
+};
 
-export default withRouter(GameField);
+export default GameField;
