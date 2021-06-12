@@ -13,7 +13,8 @@ module.exports = {
   ],
   "plugins": [
     "react",
-    "only-warn"
+    "only-warn",
+    "react-hooks"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -31,6 +32,8 @@ module.exports = {
     "comma-dangle": ["error", "never"],
     "no-restricted-syntax": [0],
     "no-param-reassign": [1, { "props": false }],
-    "object-curly-newline": [0]
+    "object-curly-newline": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
 };
