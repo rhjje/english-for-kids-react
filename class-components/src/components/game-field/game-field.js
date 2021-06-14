@@ -17,7 +17,7 @@ class GameField extends React.Component {
       gameMode: false,
       buttonRepeat: false
     };
-
+    this.props.onSetPage(this.props.match.params.id);
     this.handleChange = this.handleChange.bind(this);
     this.handleClickPlay = this.handleClickPlay.bind(this);
   }
@@ -93,7 +93,7 @@ class GameField extends React.Component {
             setTimeout(() => {
               if (mistakes > 0) {
                 failure.play();
-                sessionStorage.setItem('mistakes', `${mistakes}`);
+                this.props.onCountMistakes(mistakes);
                 this.props.history.push('/final-page-game-over');
               } else {
                 success.play();
@@ -120,8 +120,6 @@ class GameField extends React.Component {
     } else {
       cards = data[this.props.match.params.id];
     }
-    // const cards = data[this.props.match.params.id];
-    sessionStorage.setItem('page', `${this.props.match.params.id}`);
 
     if (cards.length === 0) {
       return (

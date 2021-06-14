@@ -11,22 +11,57 @@ import Statistics from '../statistics/statistics';
 
 import './app.scss';
 
-function App() {
-  return (
-    <>
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path="/statistics" component={Statistics} />
-          <Route exact path="/final-page-game-over" component={FinalPageGameOver} />
-          <Route exact path="/final-page-win" component={FinalPageWin} />
-          <Route path="/:id" component={GameField} />
-          <Route exact path="/" component={Home} />
-        </Switch>
-        <Footer />
-      </Router>
-    </>
-  );
-}
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mistakes: null,
+      page: null
+    };
 
-export default App;
+    this.onCountMistakes = this.onCountMistakes.bind(this);
+    this.onSetPage = this.onSetPage.bind(this);
+  }
+
+  onCountMistakes(number) {
+    this.setState({
+      mistakes: number
+    });
+  }
+
+  onSetPage(url) {
+    this.setState({
+      page: url
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/statistics" component={Statistics} />
+            <Route exact path="/final-page-game-over">
+              <FinalPageGameOver
+                mistakes={this.state.mistakes}
+                page={this.state.page}
+              />
+            </Route>
+            <Route exact path="/final-page-win" component={FinalPageWin}>
+              <FinalPageWin page={this.state.page} />
+            </Route>
+            <Route path="/:id">
+              <GameField
+                onCountMistakes={this.onCountMistakes}
+                onSetPage={this.onSetPage}
+              />
+            </Route>
+            <Route exact path="/" component={Home} />
+          </Switch>
+          <Footer />
+        </Router>
+      </>
+    );
+  }
+}
