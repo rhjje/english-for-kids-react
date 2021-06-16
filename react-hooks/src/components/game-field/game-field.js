@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import Card from './card';
 import GameMode from './game-mode';
 import ButtonPlay from './button-play';
@@ -13,11 +14,17 @@ const GameField = (props) => {
   const [gameMode, setGameMode] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState();
+  const { id } = useParams();
+  const history = useHistory();
+
+  useEffect(() => {
+    props.onSetPage(id);
+  });
 
   useEffect(() => {
     setGameMode(false);
     setRepeat(false);
-  }, [props.match.params.id]);
+  }, [id]);
 
   const playGame = () => {
     const correct = new Audio('./sounds/correct.mp3');
@@ -65,11 +72,11 @@ const GameField = (props) => {
             setTimeout(() => {
               if (mistakes > 0) {
                 failure.play();
-                sessionStorage.setItem('mistakes', `${mistakes}`);
-                props.history.push('/final-page-game-over');
+                props.onCountMistakes(mistakes);
+                history.push('/final-page-game-over');
               } else {
                 success.play();
-                props.history.push('/final-page-win');
+                history.push('/final-page-win');
               }
             }, 1000);
           }
@@ -95,12 +102,11 @@ const GameField = (props) => {
   };
 
   let cards;
-  if (props.match.params.id === 'repeat-difficult-words') {
+  if (id === 'repeat-difficult-words') {
     cards = JSON.parse(localStorage.getItem('difficult-words'));
   } else {
-    cards = data[props.match.params.id];
+    cards = data[id];
   }
-  sessionStorage.setItem('page', `${props.match.params.id}`);
 
   if (cards.length === 0) {
     return (
@@ -115,7 +121,7 @@ const GameField = (props) => {
       <GameMode
         gameMode={gameMode}
         handleChange={() => setGameMode(!gameMode)}
-        key={props.match.params.id}
+        key={id}
       />
       <div className="cards">
         {cards.map((card) => (

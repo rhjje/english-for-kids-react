@@ -3,17 +3,17 @@ import ButtonsFinish from './buttons-finish';
 import failure from '../../assets/icons/failure.svg';
 import './final-page.scss';
 
-const FinalPageGameOver = () => (
+const FinalPageGameOver = ({ mistakes, page }) => (
   <section className="final-page">
     <span className="final-page__title">
       You lost(: Train and try again!
       <br />
-      {`You made ${sessionStorage.getItem('mistakes')} mistake(s).`}
+      {`You made ${mistakes} mistake(s).`}
     </span>
     <div className="final-page__image">
       <img src={failure} width="400" height="400" alt="Victory" />
     </div>
-    <ButtonsFinish />
+    <ButtonsFinish page={page} />
   </section>
 );
 

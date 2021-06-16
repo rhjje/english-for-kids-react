@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './buttons-finish.scss';
 
-const ButtonsFinish = () => (
+const ButtonsFinish = ({ page }) => (
   <div className="final-page__buttons">
-    <Link to={`/${sessionStorage.getItem('page')}`} className="new-game">New game</Link>
+    <Link to={`/${page}`} className="new-game">New game</Link>
     <MainMenu />
   </div>
 );
