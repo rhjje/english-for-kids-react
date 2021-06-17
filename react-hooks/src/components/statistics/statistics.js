@@ -26,7 +26,7 @@ const setLocalStorage = () => {
     };
     statistics.push(currentObj);
   });
-  localStorage.setItem('data', `${JSON.stringify(statistics)}`);
+  localStorage.setItem('data', JSON.stringify(statistics));
 };
 
 const countingStatistics = (word, category) => {
@@ -51,7 +51,7 @@ const countingStatistics = (word, category) => {
       }
     }
   });
-  localStorage.setItem('data', `${JSON.stringify(data)}`);
+  localStorage.setItem('data', JSON.stringify(data));
 };
 
 const formingListWords = () => {
@@ -61,7 +61,7 @@ const formingListWords = () => {
   for (let i = 0; i < 8; i += 1) {
     if (data[i].wrong > 0) array.push(data[i]);
   }
-  localStorage.setItem('difficult-words', `${JSON.stringify(array)}`);
+  localStorage.setItem('difficult-words', JSON.stringify(array));
 };
 
 const sortTable = (field, direction) => {
@@ -71,7 +71,7 @@ const sortTable = (field, direction) => {
   } else {
     data.sort((a, b) => (a[field] > b[field] ? 1 : -1));
   }
-  localStorage.setItem('data', `${JSON.stringify(data)}`);
+  localStorage.setItem('data', JSON.stringify(data));
 };
 
 const Statistics = () => {
@@ -97,8 +97,8 @@ const Statistics = () => {
       percent: 0,
       image: item.image
     }));
-    localStorage.setItem('data', `${JSON.stringify(resetArray)}`);
-    localStorage.removeItem('difficult-words');
+    localStorage.setItem('data', JSON.stringify(resetArray));
+    localStorage.setItem('difficult-words', JSON.stringify([]));
     setStorage(JSON.parse(localStorage.getItem('data')));
   };
 
