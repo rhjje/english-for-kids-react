@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonsFinish from './buttons-finish';
-import failure from '../../assets/icons/failure.svg';
 import './final-page.scss';
+import failure from '../../assets/icons/failure.svg';
 
 const FinalPageGameOver = ({ mistakes, page }) => (
   <section className="final-page">

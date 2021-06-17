@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { countingStatistics } from '../statistics/statistics';
 import './card.scss';
+import { countingStatistics } from '../statistics/statistics';
 
 const Card = ({ word, translation, image, gameMode }) => {
   const [flipped, setFlipped] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonsFinish from './buttons-finish';
-import success from '../../assets/icons/success.svg';
 import './final-page.scss';
+import success from '../../assets/icons/success.svg';
 
 const FinalPageWin = ({ page }) => (
   <section className="final-page">

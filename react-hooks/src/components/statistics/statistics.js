@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
-import cards from '../../assets/JSON/cards.json';
-import './statistics.scss';
+import React, { useState, useEffect } from 'react';
 import StatisticsButtons from './statistics-buttons';
+import './statistics.scss';
+import cards from '../../assets/JSON/cards.json';
 
 const setLocalStorage = () => {
   const array = [];
@@ -74,12 +74,16 @@ const sortTable = (field, direction) => {
   localStorage.setItem('data', `${JSON.stringify(data)}`);
 };
 
-if (localStorage.getItem('data')) {
-  sortTable('word', 'forward');
-}
-
 const Statistics = () => {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [storage, setStorage] = useState(JSON.parse(localStorage.getItem('data')));
+
+  useEffect(() => {
+    if (localStorage.getItem('data')) {
+      sortTable('word', 'forward');
+      formingListWords();
+      setStorage(JSON.parse(localStorage.getItem('data')));
+    }
+  }, []);
 
   const handleClickReset = () => {
     const data = JSON.parse(localStorage.getItem('data'));
@@ -95,7 +99,7 @@ const Statistics = () => {
     }));
     localStorage.setItem('data', `${JSON.stringify(resetArray)}`);
     localStorage.removeItem('difficult-words');
-    forceUpdate();
+    setStorage(JSON.parse(localStorage.getItem('data')));
   };
 
   const handleClickTh = (event) => {
@@ -144,11 +148,8 @@ const Statistics = () => {
         break;
     }
     title.innerHTML = `${arrow} ${title.innerHTML}`;
-    forceUpdate();
+    setStorage(JSON.parse(localStorage.getItem('data')));
   };
-
-  formingListWords();
-  const dataForTable = JSON.parse(localStorage.getItem('data'));
 
   return (
     <div className="statistics">
@@ -169,7 +170,7 @@ const Statistics = () => {
         </table>
         <div className="statistics-table__body">
           <table className="table">
-            {dataForTable.map((item) => (
+            {storage.map((item) => (
               <tbody key={item.word}>
                 <tr>
                   <td>{item.word}</td>
