@@ -105,8 +105,7 @@ const Statistics = () => {
   };
 
   const handleClickTh = (event) => {
-    const heads = document.querySelectorAll('th');
-    heads.forEach((head) => {
+    thRefs.current.forEach((head) => {
       if (head.innerText.match(/↓|↑/)) {
         head.innerText = head.innerText.substring(2);
       }
