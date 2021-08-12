@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import Card from './card';
@@ -19,6 +19,9 @@ const GameField = (props) => {
   const [audio, setAudio] = useState();
   const { id } = useParams();
   const history = useHistory();
+  const scoreRef = useRef(null);
+  const cardsRefs = useRef([]);
+  cardsRefs.current = [];
 
   useEffect(() => {
     props.onSetPage(id);
@@ -34,9 +37,9 @@ const GameField = (props) => {
     const error = new Audio('./sounds/error.mp3');
     const success = new Audio('./sounds/success.mp3');
     const failure = new Audio('./sounds/failure.mp3');
-    const cards = document.querySelectorAll('.card-word__front');
+
     const words = [];
-    cards.forEach((card) => {
+    cardsRefs.current.forEach((card) => {
       words.push(card.getAttribute('data-name'));
     });
     words.sort(() => Math.random() - 0.5);
@@ -53,12 +56,11 @@ const GameField = (props) => {
 
     sayWord();
 
-    cards.forEach((card, i) => {
+    cardsRefs.current.forEach((card) => {
       card.addEventListener('click', () => {
         if (card.getAttribute('data-name') === words[currentWord]) {
           card.style.filter = 'blur(5px)';
-          const activeCard = document.querySelector(`.card-word:nth-child(${i + 1})`);
-          activeCard.classList.remove('active-card');
+          card.parentElement.classList.remove('active-card');
           correct.play();
           countingStatistics(`${words[currentWord]}`, 'correct');
 
@@ -67,7 +69,7 @@ const GameField = (props) => {
 
           const stars = document.createElement('img');
           stars.src = star;
-          document.querySelector('.game-score').append(stars);
+          scoreRef.current.append(stars);
 
           if (currentWord < words.length) {
             setTimeout(sayWord, 500);
@@ -86,7 +88,7 @@ const GameField = (props) => {
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
           const stars = document.createElement('img');
           stars.src = emptyStar;
-          document.querySelector('.game-score').append(stars);
+          scoreRef.current.append(stars);
           error.play();
           countingStatistics(`${words[currentWord]}`, 'wrong');
           mistakes += 1;
@@ -101,6 +103,12 @@ const GameField = (props) => {
       playGame();
     } else {
       audio.play();
+    }
+  };
+
+  const addCardRef = (element) => {
+    if (element && !cardsRefs.current.includes(element)) {
+      cardsRefs.current.push(element);
     }
   };
 
@@ -129,6 +137,7 @@ const GameField = (props) => {
       <div className="cards">
         {cards.map((card) => (
           <Card
+            cardRef={addCardRef}
             word={card.word}
             translation={card.translation}
             image={card.image}
@@ -145,7 +154,7 @@ const GameField = (props) => {
           />
         )
         : ''}
-      <div className="game-score" />
+      <div className="game-score" ref={scoreRef} />
     </div>
   );
 };

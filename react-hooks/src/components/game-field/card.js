@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './card.scss';
 import { countingStatistics } from '../statistics/statistics';
 
-const Card = ({ word, translation, image, gameMode }) => {
+const Card = ({ word, translation, image, gameMode, cardRef }) => {
   const [flipped, setFlipped] = useState(false);
   const [rotation] = useState(`rotate(${(Math.random() * (3 - (-3)) - 3).toFixed(1)}deg)`);
 
@@ -27,7 +27,7 @@ const Card = ({ word, translation, image, gameMode }) => {
   }
   return (
     <div className="card-word active-card" onMouseLeave={() => setFlipped(false)} style={{ transform: `${rotation}` }}>
-      <div className={`card-word__front${classFront}`} data-number="1" data-name={word} onClick={handleClickCard}>
+      <div className={`card-word__front${classFront}`} data-number="1" data-name={word} onClick={handleClickCard} ref={cardRef}>
         <div className={`card-word__front-image${classImage}`}>
           <img src={image} alt={word} />
         </div>
