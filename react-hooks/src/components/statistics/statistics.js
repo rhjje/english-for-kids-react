@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import StatisticsButtons from './statistics-buttons';
 import './statistics.scss';
 import cards from '../../assets/JSON/cards.json';
@@ -76,6 +76,8 @@ const sortTable = (field, direction) => {
 
 const Statistics = () => {
   const [storage, setStorage] = useState(JSON.parse(localStorage.getItem('data')));
+  const thRefs = useRef([]);
+  thRefs.current = [];
 
   useEffect(() => {
     if (localStorage.getItem('data')) {
@@ -121,34 +123,38 @@ const Statistics = () => {
       event.target.setAttribute('data-direction', 'back');
     }
 
-    let title;
     switch (event.target.getAttribute('data-value')) {
       case 'word':
-        title = document.querySelector('th:first-child');
+        thRefs.current[0].innerHTML = `${arrow} Word`;
         break;
       case 'translation':
-        title = document.querySelector('th:nth-child(2)');
+        thRefs.current[1].innerHTML = `${arrow} Translation`;
         break;
       case 'category':
-        title = document.querySelector('th:nth-child(3)');
+        thRefs.current[2].innerHTML = `${arrow} Category`;
         break;
       case 'clicks':
-        title = document.querySelector('th:nth-child(4)');
+        thRefs.current[3].innerHTML = `${arrow} Clicks`;
         break;
       case 'correct':
-        title = document.querySelector('th:nth-child(5)');
+        thRefs.current[4].innerHTML = `${arrow} Correct`;
         break;
       case 'wrong':
-        title = document.querySelector('th:nth-child(6)');
+        thRefs.current[5].innerHTML = `${arrow} Wrong`;
         break;
       case 'percent':
-        title = document.querySelector('th:last-child');
+        thRefs.current[6].innerHTML = `${arrow} % errors`;
         break;
       default:
         break;
     }
-    title.innerHTML = `${arrow} ${title.innerHTML}`;
     setStorage(JSON.parse(localStorage.getItem('data')));
+  };
+
+  const addThRef = (element) => {
+    if (element && !thRefs.current.includes(element)) {
+      thRefs.current.push(element);
+    }
   };
 
   return (
@@ -158,13 +164,13 @@ const Statistics = () => {
         <table className="statistics-table__header">
           <thead>
             <tr onClick={handleClickTh}>
-              <th data-value="word" data-direction="back">↓ Word</th>
-              <th data-value="translation" data-direction="forward">Translation</th>
-              <th data-value="category" data-direction="forward">Category</th>
-              <th data-value="clicks" data-direction="forward">Clicks</th>
-              <th data-value="correct" data-direction="forward">Correct</th>
-              <th data-value="wrong" data-direction="forward">Wrong</th>
-              <th data-value="percent" data-direction="forward">% errors</th>
+              <th ref={addThRef} data-value="word" data-direction="back">↓ Word</th>
+              <th ref={addThRef} data-value="translation" data-direction="forward">Translation</th>
+              <th ref={addThRef} data-value="category" data-direction="forward">Category</th>
+              <th ref={addThRef} data-value="clicks" data-direction="forward">Clicks</th>
+              <th ref={addThRef} data-value="correct" data-direction="forward">Correct</th>
+              <th ref={addThRef} data-value="wrong" data-direction="forward">Wrong</th>
+              <th ref={addThRef} data-value="percent" data-direction="forward">% errors</th>
             </tr>
           </thead>
         </table>
