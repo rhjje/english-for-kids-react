@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from '../header/header';
@@ -7,30 +7,36 @@ import GameField from '../game-field/game-field';
 import Footer from '../footer/footer';
 import FinalPageWin from '../final-page/final-page-win';
 import FinalPageGameOver from '../final-page/final-page-game-over';
-import Statistics from '../statistics/statistics';
+import Statistics, { setLocalStorage } from '../statistics/statistics';
 
 import './app.scss';
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState();
-  const [mistakes, setMistakes] = useState();
+  const [currentPage, setCurrentPage] = useState(null);
+  const [mistakes, setMistakes] = useState(null);
+
+  useEffect(() => {
+    if (!localStorage.getItem('data')) {
+      setLocalStorage();
+    }
+  }, []);
 
   return (
     <>
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/statistics" component={Statistics} />
-          <Route exact path="/final-page-game-over">
+          <Route path="/statistics" component={Statistics} />
+          <Route path="/final-page-game-over">
             <FinalPageGameOver mistakes={mistakes} page={currentPage} />
           </Route>
-          <Route exact path="/final-page-win" component={FinalPageWin}>
+          <Route path="/final-page-win" component={FinalPageWin}>
             <FinalPageWin page={currentPage} />
           </Route>
           <Route path="/:id">
             <GameField
-              onCountMistakes={(event) => setMistakes(event)}
-              onSetPage={(event) => setCurrentPage(event)}
+              onCountMistakes={setMistakes}
+              onSetPage={setCurrentPage}
             />
           </Route>
           <Route exact path="/" component={Home} />

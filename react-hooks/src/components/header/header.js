@@ -6,11 +6,8 @@ import './header.scss';
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const classBg = show ? 'burger-menu__bg' : 'burger-menu__bg burger-menu__bg_disabled';
 
-  let classBg = 'burger-menu__bg burger-menu__bg_disabled';
-  if (show) {
-    classBg = 'burger-menu__bg';
-  }
   return (
     <header className="header">
       <BurgerButton

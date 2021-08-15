@@ -11,7 +11,7 @@ const FinalPageGameOver = ({ mistakes, page }) => (
       {`You made ${mistakes} mistake(s).`}
     </span>
     <div className="final-page__image">
-      <img src={failure} width="400" height="400" alt="Victory" />
+      <img src={failure} width="400" height="400" alt="Failure" />
     </div>
     <ButtonsFinish page={page} />
   </section>

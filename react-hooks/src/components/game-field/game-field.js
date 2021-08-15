@@ -13,7 +13,7 @@ import data from '../../assets/JSON/cards.json';
 import star from '../../assets/icons/star-win.svg';
 import emptyStar from '../../assets/icons/star.svg';
 
-const GameField = (props) => {
+const GameField = ({ onCountMistakes, onSetPage }) => {
   const [gameMode, setGameMode] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState();
@@ -24,7 +24,7 @@ const GameField = (props) => {
   cardsRefs.current = [];
 
   useEffect(() => {
-    props.onSetPage(id);
+    onSetPage(id);
   });
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const GameField = (props) => {
             setTimeout(() => {
               if (mistakes > 0) {
                 failure.play();
-                props.onCountMistakes(mistakes);
+                onCountMistakes(mistakes);
                 history.push('/final-page-game-over');
               } else {
                 success.play();
