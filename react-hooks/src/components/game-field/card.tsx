@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import { useState, MouseEvent, FC } from 'react';
 import './card.scss';
 import { countingStatistics } from '../statistics/statistics';
 
-const Card = ({ word, translation, image, gameMode, cardRef }) => {
+interface Props {
+  word: string;
+  translation: string;
+  image: string;
+  gameMode: boolean;
+  cardRef: any;
+}
+
+const Card: FC<Props> = ({ word, translation, image, gameMode, cardRef }) => {
   const [flipped, setFlipped] = useState(false);
   const [rotation] = useState(`rotate(${(Math.random() * (3 - (-3)) - 3).toFixed(1)}deg)`);
 
@@ -11,8 +19,9 @@ const Card = ({ word, translation, image, gameMode, cardRef }) => {
   const classBack = `card-word__back${flipped ? ' card-word__back_flipped' : ''}`;
   const classImage = `card-word__front-image${gameMode ? ' card-word__front-image_active' : ''}`;
 
-  const handleClickCard = (event) => {
-    if (!event.target.classList.contains('reverse-button') && !gameMode) {
+  const handleClickCard = (event: MouseEvent) => {
+    const target = event.target as Element;
+    if (!target.classList.contains('reverse-button') && !gameMode) {
       countingStatistics(`${word}`, 'clicks');
       audio.play();
     }

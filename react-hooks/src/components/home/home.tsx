@@ -1,8 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
-const Home = () => (
+const Home: FC = () => (
   <div className="main">
     <div className="menu">
       <div className="menu-item">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import Card from './card';
@@ -12,6 +12,11 @@ import { countingStatistics } from '../statistics/statistics';
 import data from '../../assets/JSON/cards.json';
 import star from '../../assets/icons/star-win.svg';
 import emptyStar from '../../assets/icons/star.svg';
+
+// interface Props {
+//   onCountMistakes: () => void;
+//   onSetPage: () => void;
+// }
 
 const GameField = ({ onCountMistakes, onSetPage }) => {
   const [gameMode, setGameMode] = useState(false);

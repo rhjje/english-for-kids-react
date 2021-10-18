@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import BurgerMenu from './burger-menu';
 import BurgerButton from './burger-button';
 import './header.scss';
 
-const Header = () => {
+const Header: FC = () => {
   const [show, setShow] = useState(false);
   const classBg = show ? 'burger-menu__bg' : 'burger-menu__bg burger-menu__bg_disabled';
 

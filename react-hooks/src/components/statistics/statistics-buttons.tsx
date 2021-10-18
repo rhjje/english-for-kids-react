@@ -1,8 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import './statistics-buttons.scss';
 
-const StatisticsButtons = ({ onClickReset }) => {
+interface Props {
+  onClickReset: () => void
+}
+
+const StatisticsButtons: FC<Props> = ({ onClickReset }) => {
   const history = useHistory();
   return (
     <div className="statistics-buttons">

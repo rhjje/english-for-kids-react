@@ -1,7 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import './burger-button.scss';
 
-const BurgerButton = ({ onClickButton, menuOpen }) => (
+interface Props {
+  onClickButton: () => void;
+  menuOpen: boolean;
+}
+
+const BurgerButton: FC<Props> = ({ onClickButton, menuOpen }) => (
   <div
     className={`burger-menu__button${menuOpen ? ' burger-menu__button_active' : ''}`}
     onClick={onClickButton}

@@ -1,9 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import ButtonsFinish from './buttons-finish';
 import './final-page.scss';
 import success from '../../assets/icons/success.svg';
 
-const FinalPageWin = ({ page }) => (
+interface Props {
+  page: string | null;
+}
+
+const FinalPageWin: FC<Props> = ({ page }) => (
   <section className="final-page">
     <span className="final-page__title">Congratulations! You win!</span>
     <div className="final-page__image">

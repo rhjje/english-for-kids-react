@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import StatisticsButtons from './statistics-buttons';
 import './statistics.scss';
 import cards from '../../assets/JSON/cards.json';

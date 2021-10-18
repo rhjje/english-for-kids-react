@@ -1,7 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import './button-play.scss';
 
-const ButtonPlay = ({ buttonRepeat, onClick }) => (
+interface Props {
+  buttonRepeat: boolean;
+  onClick: () => void;
+}
+
+const ButtonPlay: FC<Props> = ({ buttonRepeat, onClick }) => (
   <button
     type="button"
     className={`button-play${buttonRepeat ? ' button-play_repeat' : ''}`}

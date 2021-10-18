@@ -1,7 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import './game-mode.scss';
 
-const GameMode = ({ gameMode, handleChange }) => (
+interface Props {
+  gameMode: boolean;
+  handleChange: () => void;
+}
+
+const GameMode: FC<Props> = ({ gameMode, handleChange }) => (
   <div className="mode">
     <div className={`mode__train${gameMode ? '' : ' mode__train_active'}`}>Train</div>
     <label className="mode__switch">

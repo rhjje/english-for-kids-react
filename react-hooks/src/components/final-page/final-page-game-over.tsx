@@ -1,9 +1,14 @@
-import React from 'react';
+import { FC } from 'react';
 import ButtonsFinish from './buttons-finish';
 import './final-page.scss';
 import failure from '../../assets/icons/failure.svg';
 
-const FinalPageGameOver = ({ mistakes, page }) => (
+interface Props {
+  mistakes: number | null;
+  page: string | null;
+}
+
+const FinalPageGameOver: FC<Props> = ({ mistakes, page }) => (
   <section className="final-page">
     <span className="final-page__title">
       You lost(: Train and try again!

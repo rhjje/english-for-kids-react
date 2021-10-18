@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import './footer.scss';
 import telegram from '../../assets/icons/telegram.svg';
 import github from '../../assets/icons/github.svg';
 
-const Footer = () => (
+const Footer: FC = () => (
   <footer className="footer">
     <div className="contacts">
       <a href="tg://resolve?domain=@rhjje" className="telegram">

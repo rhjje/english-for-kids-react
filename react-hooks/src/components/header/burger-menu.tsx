@@ -1,8 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import './burger-menu.scss';
 
-const BurgerMenu = ({ menuState, closeMenu }) => {
+interface Props {
+  menuState: boolean;
+  closeMenu: () => void
+}
+
+const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
   const classItem = `navigation__item${menuState ? ' navigation__item_open' : ''}`;
 
   return (
