@@ -30,11 +30,12 @@ module.exports = {
     'react/react-in-jsx-scope': [0],
     'react/prop-types': 0,
     'react/jsx-filename-extension': [0],
-    'react/jsx-one-expression-per-line': [1, { allow: 'single-child' }],
+    'react/jsx-one-expression-per-line': 'off',
     'react/destructuring-assignment': [0, 'always', { ignoreClassFields: true }],
     'no-restricted-syntax': [0],
     'no-param-reassign': [1, { props: false }],
     'object-curly-newline': [0],
+    'import/prefer-default-export': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'import/extensions': [
