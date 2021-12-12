@@ -12,7 +12,7 @@ interface Props {
 
 const Card: FC<Props> = ({ word, translation, image, gameMode, cardRef }) => {
   const [flipped, setFlipped] = useState(false);
-  const [rotation] = useState(`rotate(${(Math.random() * (3 - (-3)) - 3).toFixed(1)}deg)`);
+  const [rotation] = useState(`rotate(${(Math.random() * (3 - -3) - 3).toFixed(1)}deg)`);
 
   const audio = new Audio(`./sounds/${word}.mp3`);
   const classFront = `card-word__front${flipped ? ' card-word__front_flipped' : ''}`;
@@ -28,8 +28,18 @@ const Card: FC<Props> = ({ word, translation, image, gameMode, cardRef }) => {
   };
 
   return (
-    <div className="card-word active-card" onMouseLeave={() => setFlipped(false)} style={{ transform: `${rotation}` }}>
-      <div className={classFront} data-number="1" data-name={word} onClick={handleClickCard} ref={cardRef}>
+    <div
+      className="card-word active-card"
+      onMouseLeave={() => setFlipped(false)}
+      style={{ transform: `${rotation}` }}
+    >
+      <div
+        className={classFront}
+        data-number="1"
+        data-name={word}
+        onClick={handleClickCard}
+        ref={cardRef}
+      >
         <div className={classImage}>
           <img src={image} alt={word} />
         </div>

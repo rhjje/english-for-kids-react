@@ -34,10 +34,7 @@ const App = () => {
             <FinalPageWin page={currentPage} />
           </Route>
           <Route path="/:id">
-            <GameField
-              onCountMistakes={setMistakes}
-              onSetPage={setCurrentPage}
-            />
+            <GameField onCountMistakes={setMistakes} onSetPage={setCurrentPage} />
           </Route>
           <Route exact path="/" component={Home} />
         </Switch>

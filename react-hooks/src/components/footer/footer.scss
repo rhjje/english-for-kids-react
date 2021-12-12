@@ -6,7 +6,7 @@
   align-items: center;
   position: fixed;
   top: calc(100vh - 80px);
-  background: linear-gradient(to bottom,rgba(255, 255, 255, 0), rgb(255, 255, 255));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255));
 }
 
 .contacts {
@@ -16,7 +16,8 @@
   justify-content: space-between;
 }
 
-.telegram, .git {
+.telegram,
+.git {
   width: 30px;
   height: 30px;
   display: flex;

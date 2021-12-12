@@ -4,7 +4,7 @@
   justify-content: space-between;
 }
 
-.repeat-button, 
+.repeat-button,
 .reset-button {
   padding: 5px;
   min-width: 120px;
@@ -13,10 +13,10 @@
   font-weight: 700;
   background-color: whitesmoke;
   border: 1px solid rgb(196, 63, 90);
-  transition: .3s;
+  transition: 0.3s;
   outline: 5px solid rgba(209, 204, 204, 0.5);
   &:hover {
-    transition: .3s;
+    transition: 0.3s;
     cursor: pointer;
     background-color: rgb(196, 63, 90);
   }
@@ -30,7 +30,7 @@
     width: 270px;
   }
 
-  .repeat-button, 
+  .repeat-button,
   .reset-button {
     min-width: 100px;
     height: 35px;

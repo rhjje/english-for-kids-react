@@ -4,7 +4,7 @@ import './burger-menu.scss';
 
 interface Props {
   menuState: boolean;
-  closeMenu: () => void
+  closeMenu: () => void;
 }
 
 const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
@@ -14,34 +14,54 @@ const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
     <div className={`burger-menu${menuState ? ' burger-menu_open' : ''}`}>
       <ul className="navigation">
         <li className={classItem}>
-          <NavLink to="/" exact activeClassName="navigation__item_active" onClick={closeMenu}>Main page</NavLink>
+          <NavLink to="/" exact activeClassName="navigation__item_active" onClick={closeMenu}>
+            Main page
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/action-a" activeClassName="navigation__item_active" onClick={closeMenu}>Action (set A)</NavLink>
+          <NavLink to="/action-a" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Action (set A)
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/action-b" activeClassName="navigation__item_active" onClick={closeMenu}>Action (set B)</NavLink>
+          <NavLink to="/action-b" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Action (set B)
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/action-c" activeClassName="navigation__item_active" onClick={closeMenu}>Action (set C)</NavLink>
+          <NavLink to="/action-c" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Action (set C)
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/adjective" activeClassName="navigation__item_active" onClick={closeMenu}>Adjective</NavLink>
+          <NavLink to="/adjective" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Adjective
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/animal-a" activeClassName="navigation__item_active" onClick={closeMenu}>Animal (set A)</NavLink>
+          <NavLink to="/animal-a" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Animal (set A)
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/animal-b" activeClassName="navigation__item_active" onClick={closeMenu}>Animal (set B)</NavLink>
+          <NavLink to="/animal-b" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Animal (set B)
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/clothes" activeClassName="navigation__item_active" onClick={closeMenu}>Clothes</NavLink>
+          <NavLink to="/clothes" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Clothes
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/emotion" activeClassName="navigation__item_active" onClick={closeMenu}>Emotion</NavLink>
+          <NavLink to="/emotion" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Emotion
+          </NavLink>
         </li>
         <li className={classItem}>
-          <NavLink to="/statistics" activeClassName="navigation__item_active" onClick={closeMenu}>Statistics</NavLink>
+          <NavLink to="/statistics" activeClassName="navigation__item_active" onClick={closeMenu}>
+            Statistics
+          </NavLink>
         </li>
       </ul>
     </div>

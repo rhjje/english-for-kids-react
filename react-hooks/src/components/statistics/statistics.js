@@ -22,7 +22,7 @@ const setLocalStorage = () => {
       correct: 0,
       wrong: 0,
       percent: 0,
-      image: item.image
+      image: item.image,
     };
     statistics.push(currentObj);
   });
@@ -97,7 +97,7 @@ const Statistics = () => {
       correct: 0,
       wrong: 0,
       percent: 0,
-      image: item.image
+      image: item.image,
     }));
     localStorage.setItem('data', JSON.stringify(resetArray));
     localStorage.setItem('difficult-words', JSON.stringify([]));
@@ -163,13 +163,27 @@ const Statistics = () => {
         <table className="statistics-table__header">
           <thead>
             <tr onClick={handleClickTh}>
-              <th ref={addThRef} data-value="word" data-direction="back">↓ Word</th>
-              <th ref={addThRef} data-value="translation" data-direction="forward">Translation</th>
-              <th ref={addThRef} data-value="category" data-direction="forward">Category</th>
-              <th ref={addThRef} data-value="clicks" data-direction="forward">Clicks</th>
-              <th ref={addThRef} data-value="correct" data-direction="forward">Correct</th>
-              <th ref={addThRef} data-value="wrong" data-direction="forward">Wrong</th>
-              <th ref={addThRef} data-value="percent" data-direction="forward">% errors</th>
+              <th ref={addThRef} data-value="word" data-direction="back">
+                ↓ Word
+              </th>
+              <th ref={addThRef} data-value="translation" data-direction="forward">
+                Translation
+              </th>
+              <th ref={addThRef} data-value="category" data-direction="forward">
+                Category
+              </th>
+              <th ref={addThRef} data-value="clicks" data-direction="forward">
+                Clicks
+              </th>
+              <th ref={addThRef} data-value="correct" data-direction="forward">
+                Correct
+              </th>
+              <th ref={addThRef} data-value="wrong" data-direction="forward">
+                Wrong
+              </th>
+              <th ref={addThRef} data-value="percent" data-direction="forward">
+                % errors
+              </th>
             </tr>
           </thead>
         </table>

@@ -10,17 +10,11 @@ const Header: FC = () => {
 
   return (
     <header className="header">
-      <BurgerButton
-        onClickButton={() => setShow(!show)}
-        menuOpen={show}
-      />
+      <BurgerButton onClickButton={() => setShow(!show)} menuOpen={show} />
       <Link to="/" className="title-wrapper">
         <h1 className="title">English for Kids</h1>
       </Link>
-      <BurgerMenu
-        menuState={show}
-        closeMenu={() => setShow(!show)}
-      />
+      <BurgerMenu menuState={show} closeMenu={() => setShow(!show)} />
       <div className={classBg} onClick={() => setShow(!show)} />
     </header>
   );

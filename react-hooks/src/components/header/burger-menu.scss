@@ -3,7 +3,7 @@
   background-color: rgb(196, 63, 90);
   width: 80px;
   height: 80px;
-  transition: .5s;
+  transition: 0.5s;
   left: 20px;
   top: 14px;
   border-radius: 50%;
@@ -30,7 +30,7 @@
   margin-top: 10px;
   border-bottom: 2px solid hsla(0, 0%, 96%, 0.5);
   transform: scale(0);
-  transition: .3s;
+  transition: 0.3s;
   a {
     color: whitesmoke;
     margin-left: 10px;
@@ -45,7 +45,7 @@
   }
 }
 
-a.navigation__item_active  {
+a.navigation__item_active {
   opacity: 1;
   font-weight: 700;
   font-size: 3.4rem;

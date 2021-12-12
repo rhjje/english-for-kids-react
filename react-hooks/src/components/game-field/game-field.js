@@ -134,11 +134,7 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
   }
   return (
     <div className="game-field">
-      <GameMode
-        gameMode={gameMode}
-        handleChange={() => setGameMode(!gameMode)}
-        key={id}
-      />
+      <GameMode gameMode={gameMode} handleChange={() => setGameMode(!gameMode)} key={id} />
       <div className="cards">
         {cards.map((card) => (
           <Card
@@ -151,14 +147,7 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
           />
         ))}
       </div>
-      {gameMode
-        ? (
-          <ButtonPlay
-            buttonRepeat={repeat}
-            onClick={handleClickPlay}
-          />
-        )
-        : ''}
+      {gameMode ? <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} /> : ''}
       <div className="game-score" ref={scoreRef} />
     </div>
   );

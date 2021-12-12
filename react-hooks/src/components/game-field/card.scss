@@ -3,7 +3,7 @@
   height: 260px;
   position: relative;
   perspective: 100vw;
-  transition: .3s;
+  transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,11 +13,12 @@
 .active-card {
   &:hover {
     cursor: pointer;
-    transform:  scale(1.1) !important;
+    transform: scale(1.1) !important;
   }
 }
 
-.card-word__front, .card-word__back {
+.card-word__front,
+.card-word__back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -30,16 +31,17 @@
   background-color: rgb(209, 204, 204);
   transition: 1s;
   backface-visibility: hidden;
-  box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
 }
 
-.card-word__front-image, .card-word__back-image {
+.card-word__front-image,
+.card-word__back-image {
   width: auto;
   height: 200px;
   border-radius: 10px;
   user-select: none;
   z-index: 2;
-  transition: .5s;
+  transition: 0.5s;
   background-color: rgb(209, 204, 204);
   img {
     width: auto;
@@ -51,7 +53,8 @@
   height: 260px;
 }
 
-.card-word__front-name, .card-word__back-name {
+.card-word__front-name,
+.card-word__back-name {
   font-weight: 700;
   font-size: 3rem;
   width: 230px;
@@ -63,7 +66,7 @@
 }
 
 .card-word__back {
-  background-color: #BDBDBD;
+  background-color: #bdbdbd;
   transform: rotateY(180deg);
 }
 
@@ -100,11 +103,13 @@
     border-radius: 20px;
   }
 
-  .card-word__front, .card-word__back {
+  .card-word__front,
+  .card-word__back {
     border-radius: 20px;
   }
 
-  .card-word__front-image, .card-word__back-image {
+  .card-word__front-image,
+  .card-word__back-image {
     height: 150px;
   }
 
@@ -112,7 +117,8 @@
     height: 200px;
   }
 
-  .card-word__front-name, .card-word__back-name {
+  .card-word__front-name,
+  .card-word__back-name {
     font-size: 2.6rem;
   }
 
@@ -131,11 +137,13 @@
     border-radius: 10px;
   }
 
-  .card-word__front, .card-word__back {
+  .card-word__front,
+  .card-word__back {
     border-radius: 10px;
   }
 
-  .card-word__front-image, .card-word__back-image {
+  .card-word__front-image,
+  .card-word__back-image {
     height: 115px;
   }
 
@@ -143,7 +151,8 @@
     height: 150px;
   }
 
-  .card-word__front-name, .card-word__back-name {
+  .card-word__front-name,
+  .card-word__back-name {
     font-size: 2rem;
   }
 

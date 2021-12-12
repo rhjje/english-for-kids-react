@@ -7,12 +7,16 @@ interface Props {
 }
 
 const MainMenu = () => (
-  <Link to="/" className="main-menu">Main menu</Link>
+  <Link to="/" className="main-menu">
+    Main menu
+  </Link>
 );
 
 const ButtonsFinish: FC<Props> = ({ page }) => (
   <div className="final-page__buttons">
-    <Link to={`/${page}`} className="new-game">New game</Link>
+    <Link to={`/${page}`} className="new-game">
+      New game
+    </Link>
     <MainMenu />
   </div>
 );
