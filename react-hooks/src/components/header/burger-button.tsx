@@ -1,20 +1,19 @@
 import { FC } from 'react';
-import './burger-button.scss';
+import classNames from 'classnames';
+import styles from './burger-button.module.scss';
 
 interface Props {
   onClickButton: () => void;
   menuOpen: boolean;
 }
 
-const BurgerButton: FC<Props> = ({ onClickButton, menuOpen }) => (
+export const BurgerButton: FC<Props> = ({ onClickButton, menuOpen }) => (
   <div
-    className={`burger-menu__button${menuOpen ? ' burger-menu__button_active' : ''}`}
+    className={classNames(styles.button, { [styles.active]: menuOpen })}
     onClick={onClickButton}
   >
-    <div className="first-line" />
-    <div className="second-line" />
-    <div className="third-line" />
+    <div className={styles['first-line']} />
+    <div className={styles['second-line']} />
+    <div className={styles['third-line']} />
   </div>
 );
-
-export default BurgerButton;

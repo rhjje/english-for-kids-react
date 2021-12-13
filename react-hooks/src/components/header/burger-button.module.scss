@@ -1,4 +1,4 @@
-.burger-menu__button {
+.button {
   width: 40px;
   position: absolute;
   left: -160px;
@@ -22,7 +22,7 @@
   border-radius: 1px;
 }
 
-.burger-menu__button_active {
+.active {
   .first-line {
     transform: translateY(13px) rotate(45deg);
   }

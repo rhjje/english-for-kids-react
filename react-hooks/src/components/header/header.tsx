@@ -1,23 +1,29 @@
 import { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import BurgerMenu from './burger-menu';
-import BurgerButton from './burger-button';
-import './header.scss';
+import { BurgerMenu } from './burger-menu';
+import { BurgerButton } from './burger-button';
+import styles from './header.module.scss';
 
-const Header: FC = () => {
-  const [show, setShow] = useState(false);
-  const classBg = show ? 'burger-menu__bg' : 'burger-menu__bg burger-menu__bg_disabled';
+export const Header: FC = () => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
-    <header className="header">
-      <BurgerButton onClickButton={() => setShow(!show)} menuOpen={show} />
-      <Link to="/" className="title-wrapper">
-        <h1 className="title">English for Kids</h1>
+    <header>
+      <BurgerButton
+        onClickButton={() => setMenuIsOpen(!menuIsOpen)}
+        menuOpen={menuIsOpen}
+      />
+      <Link to="/">
+        <h1 className={styles.title}>English for Kids</h1>
       </Link>
-      <BurgerMenu menuState={show} closeMenu={() => setShow(!show)} />
-      <div className={classBg} onClick={() => setShow(!show)} />
+      <BurgerMenu
+        menuState={menuIsOpen}
+        closeMenu={() => setMenuIsOpen(!menuIsOpen)}
+      />
+      <div
+        className={menuIsOpen ? styles.bg : styles.disabled}
+        onClick={() => setMenuIsOpen(!menuIsOpen)}
+      />
     </header>
   );
 };
-
-export default Header;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Header from '../header/header';
+import { Header } from '../header/header';
 import Home from '../home/home';
 import GameField from '../game-field/game-field';
 import { Footer } from '../footer/footer';
@@ -34,7 +34,10 @@ const App = () => {
             <FinalPageWin page={currentPage} />
           </Route>
           <Route path="/:id">
-            <GameField onCountMistakes={setMistakes} onSetPage={setCurrentPage} />
+            <GameField
+              onCountMistakes={setMistakes}
+              onSetPage={setCurrentPage}
+            />
           </Route>
           <Route exact path="/" component={Home} />
         </Switch>
