@@ -1,61 +1,57 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import data from '../../assets/JSON/cards.json';
 import './home.scss';
 
-const Home: FC = () => (
-  <div className="main">
-    <div className="menu">
-      <div className="menu-item">
-        <Link to="/action-a" className="menu-item__image">
-          <img src="./images/categories/actionA.jpg" alt="Action A" />
-        </Link>
-        <div className="menu-item__name">Action (set A)</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/action-b" className="menu-item__image">
-          <img src="./images/categories/actionB.jpg" alt="Action B" />
-        </Link>
-        <div className="menu-item__name">Action (set B)</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/action-c" className="menu-item__image">
-          <img src="./images/categories/actionC.jpg" alt="Action C" />
-        </Link>
-        <div className="menu-item__name">Action (set C)</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/adjective" className="menu-item__image">
-          <img src="./images/categories/adjective.jpg" alt="Adjective" />
-        </Link>
-        <div className="menu-item__name">Adjective</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/animal-a" className="menu-item__image">
-          <img src="./images/categories/animalA.jpg" alt="Animal A" />
-        </Link>
-        <div className="menu-item__name">Animal (set A)</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/animal-b" className="menu-item__image">
-          <img src="./images/categories/animalB.jpg" alt="Animal B" />
-        </Link>
-        <div className="menu-item__name">Animal (set B)</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/clothes" className="menu-item__image">
-          <img src="./images/categories/clothes.jpg" alt="Clothes" />
-        </Link>
-        <div className="menu-item__name">Clothes</div>
-      </div>
-      <div className="menu-item">
-        <Link to="/emotion" className="menu-item__image">
-          <img src="./images/categories/emotion.jpg" alt="Emotion" />
-        </Link>
-        <div className="menu-item__name">Emotion</div>
-      </div>
-      <div className="subtitle">Hello! choose a category:</div>
-    </div>
-  </div>
-);
+interface ISections {
+  word: string;
+  translation: string;
+  image: string;
+  category: string;
+  link: string;
+  key: string;
+}
 
-export default Home;
+export const Home: FC = () => {
+  // const [uploadedImages, setUploadedImages] = useState<number>(0);
+  const [sections, setSections] = useState<ISections[]>([]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('sections')) {
+      const array = JSON.parse(sessionStorage.getItem('sections')!);
+      setSections(array);
+    } else {
+      const links = Object.keys(data);
+      const array = Object.values(data).map((item, i) => {
+        const randomIndex = Math.floor(Math.random() * item.length);
+        const randomItem: any = item[randomIndex];
+        randomItem.link = links[i];
+        randomItem.key = uuidv4();
+        return randomItem;
+      });
+      sessionStorage.setItem('sections', JSON.stringify(array));
+      setSections(array);
+    }
+  }, []);
+
+  return (
+    <div className="main">
+      <div className="menu">
+        {sections.map((item) => (
+          <div className="menu-item" key={item.key}>
+            <Link to={`/${item.link}`} className="menu-item__image">
+              <img
+                // onLoad={() => setUploadedImages((prevState) => prevState + 1)}
+                src={item.image}
+                alt={item.category}
+              />
+            </Link>
+            <div className="menu-item__name">{item.category}</div>
+          </div>
+        ))}
+        <div className="subtitle">Hello! choose a category:</div>
+      </div>
+    </div>
+  );
+};

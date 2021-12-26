@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Header } from '../header/header';
-import Home from '../home/home';
+import { Home } from '../home/home';
 import GameField from '../game-field/game-field';
 import { Footer } from '../footer/footer';
 import FinalPageWin from '../final-page/final-page-win';
