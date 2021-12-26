@@ -1,8 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
+import { Preloader } from '../preloader/preloader';
 import data from '../../assets/JSON/cards.json';
-import './home.scss';
+import styles from './home.module.scss';
 
 interface ISections {
   word: string;
@@ -14,7 +16,7 @@ interface ISections {
 }
 
 export const Home: FC = () => {
-  // const [uploadedImages, setUploadedImages] = useState<number>(0);
+  const [uploadedImages, setUploadedImages] = useState<number>(0);
   const [sections, setSections] = useState<ISections[]>([]);
 
   useEffect(() => {
@@ -36,21 +38,32 @@ export const Home: FC = () => {
   }, []);
 
   return (
-    <div className="main">
-      <div className="menu">
+    <div className={styles.main}>
+      <div
+        className={classNames(styles.preloader, {
+          [styles.disabled]: uploadedImages === 8,
+        })}
+      >
+        <Preloader />
+      </div>
+      <div
+        className={classNames(styles.menu, {
+          [styles.disabled]: uploadedImages !== 8,
+        })}
+      >
         {sections.map((item) => (
-          <div className="menu-item" key={item.key}>
-            <Link to={`/${item.link}`} className="menu-item__image">
+          <div className={styles['menu-item']} key={item.key}>
+            <Link to={`/${item.link}`} className={styles.image}>
               <img
-                // onLoad={() => setUploadedImages((prevState) => prevState + 1)}
+                onLoad={() => setUploadedImages((prevState) => prevState + 1)}
                 src={item.image}
                 alt={item.category}
               />
             </Link>
-            <div className="menu-item__name">{item.category}</div>
+            <div className={styles.name}>{item.category}</div>
           </div>
         ))}
-        <div className="subtitle">Hello! choose a category:</div>
+        <div className={styles.subtitle}>Hello! choose a category:</div>
       </div>
     </div>
   );
