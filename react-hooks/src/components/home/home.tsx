@@ -7,12 +7,7 @@ import data from '../../assets/JSON/cards.json';
 import styles from './home.module.scss';
 
 interface ISections {
-  word: string;
-  translation: string;
-  image: string;
-  category: string;
-  link: string;
-  key: string;
+  [key: string]: string;
 }
 
 export const Home: FC = () => {
@@ -27,7 +22,7 @@ export const Home: FC = () => {
       const links = Object.keys(data);
       const array = Object.values(data).map((item, i) => {
         const randomIndex = Math.floor(Math.random() * item.length);
-        const randomItem: any = item[randomIndex];
+        const randomItem: ISections = item[randomIndex];
         randomItem.link = links[i];
         randomItem.key = uuidv4();
         return randomItem;
@@ -46,6 +41,7 @@ export const Home: FC = () => {
       >
         <Preloader />
       </div>
+
       <div
         className={classNames(styles.menu, {
           [styles.disabled]: uploadedImages !== 8,
