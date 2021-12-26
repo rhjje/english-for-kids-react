@@ -1,11 +1,12 @@
 import { useState, FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { BurgerMenu } from './burger-menu';
 import { BurgerButton } from './burger-button';
 import styles from './header.module.scss';
 
 export const Header: FC = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const { pathname } = useLocation();
 
   return (
     <header>
@@ -13,9 +14,13 @@ export const Header: FC = () => {
         onClickButton={() => setMenuIsOpen(!menuIsOpen)}
         menuOpen={menuIsOpen}
       />
-      <Link to="/">
+      {pathname === '/' ? (
         <h1 className={styles.title}>English for Kids</h1>
-      </Link>
+      ) : (
+        <Link to="/">
+          <h1 className={styles.title}>English for Kids</h1>
+        </Link>
+      )}
       <BurgerMenu
         menuState={menuIsOpen}
         closeMenu={() => setMenuIsOpen(!menuIsOpen)}
