@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Button } from 'components/Button';
-import './buttons-finish.scss';
 
 interface Props {
   page: string | null;
