@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import Card from './card';
-import GameMode from './game-mode';
-import ButtonPlay from './button-play';
-import { MainMenu } from '../final-page/buttons-finish';
-import './game-field.scss';
+import Card from './components/Card';
+import GameMode from './components/GameMode';
+import ButtonPlay from './components/ButtonPlay';
+import { MainMenu } from 'components/final-page/buttons-finish';
+import './GameField.scss';
 
-import { countingStatistics } from '../statistics/statistics';
+import { countingStatistics } from '../Statistics';
 
 import data from '../../assets/JSON/cards.json';
 import { starWin, star } from 'assets/illustrations';
@@ -17,7 +17,7 @@ import { starWin, star } from 'assets/illustrations';
 //   onSetPage: () => void;
 // }
 
-const GameField = ({ onCountMistakes, onSetPage }) => {
+export const GameField = ({ onCountMistakes, onSetPage }) => {
   const [gameMode, setGameMode] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState();
@@ -159,5 +159,3 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
     </div>
   );
 };
-
-export default GameField;

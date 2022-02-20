@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import StatisticsButtons from './statistics-buttons';
-import './statistics.scss';
+import StatisticsButtons from './components/StatisticsButtons';
+import './Statistics.scss';
 import cards from '../../assets/JSON/cards.json';
 
 const setLocalStorage = () => {
@@ -47,7 +47,10 @@ const countingStatistics = (word, category) => {
           break;
       }
       if (item.wrong + item.correct > 0) {
-        item.percent = +((item.wrong * 100) / (item.wrong + item.correct)).toFixed(1);
+        item.percent = +(
+          (item.wrong * 100)
+          / (item.wrong + item.correct)
+        ).toFixed(1);
       }
     }
   });
@@ -75,7 +78,9 @@ const sortTable = (field, direction) => {
 };
 
 const Statistics = () => {
-  const [storage, setStorage] = useState(JSON.parse(localStorage.getItem('data')));
+  const [storage, setStorage] = useState(
+    JSON.parse(localStorage.getItem('data')),
+  );
   const thRefs = useRef([]);
   thRefs.current = [];
 
@@ -111,7 +116,10 @@ const Statistics = () => {
       }
     });
 
-    sortTable(event.target.getAttribute('data-value'), event.target.getAttribute('data-direction'));
+    sortTable(
+      event.target.getAttribute('data-value'),
+      event.target.getAttribute('data-direction'),
+    );
 
     let arrow;
     if (event.target.getAttribute('data-direction') === 'back') {
@@ -166,7 +174,11 @@ const Statistics = () => {
               <th ref={addThRef} data-value="word" data-direction="back">
                 ↓ Word
               </th>
-              <th ref={addThRef} data-value="translation" data-direction="forward">
+              <th
+                ref={addThRef}
+                data-value="translation"
+                data-direction="forward"
+              >
                 Translation
               </th>
               <th ref={addThRef} data-value="category" data-direction="forward">
@@ -209,5 +221,4 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
-export { countingStatistics, setLocalStorage };
+export { countingStatistics, setLocalStorage, Statistics };

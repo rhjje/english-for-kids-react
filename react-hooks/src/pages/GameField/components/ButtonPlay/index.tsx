@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import './button-play.scss';
+import './ButtonPlay.scss';
 
 interface Props {
   buttonRepeat: boolean;

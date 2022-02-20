@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import './statistics-buttons.scss';
+import './StatisticsButtons.scss';
 
 interface Props {
   onClickReset: () => void;

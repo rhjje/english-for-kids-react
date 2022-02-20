@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Header } from '../header/header';
-import { Home } from '../home/home';
-import GameField from '../game-field/game-field';
+import { Home } from 'pages/Home';
+import { GameField } from 'pages/GameField';
 import { Footer } from '../footer/footer';
 import FinalPageWin from '../final-page/final-page-win';
 import FinalPageGameOver from '../final-page/final-page-game-over';
-import Statistics, { setLocalStorage } from '../statistics/statistics';
+import { Statistics, setLocalStorage } from 'pages/Statistics';
 
 import './app.scss';
 
