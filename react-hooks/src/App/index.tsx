@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import { Header } from '../header/header';
+import { AppLayout } from 'layouts/AppLayout';
 import { Home } from 'pages/Home';
 import { GameField } from 'pages/GameField';
-import { Footer } from '../footer/footer';
-import FinalPageWin from '../final-page/final-page-win';
-import FinalPageGameOver from '../final-page/final-page-game-over';
+import { FinalPageWin } from 'components/final-page/final-page-win';
+import { FinalPageGameOver } from 'components/final-page/final-page-game-over';
 import { Statistics, setLocalStorage } from 'pages/Statistics';
-
 import './app.scss';
 
-const App = () => {
+export const App = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [mistakes, setMistakes] = useState(null);
 
@@ -22,9 +19,8 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <Router>
-        <Header />
+    <Router>
+      <AppLayout>
         <Switch>
           <Route path="/statistics" component={Statistics} />
           <Route path="/final-page-game-over">
@@ -41,10 +37,7 @@ const App = () => {
           </Route>
           <Route exact path="/" component={Home} />
         </Switch>
-        <Footer />
-      </Router>
-    </>
+      </AppLayout>
+    </Router>
   );
 };
-
-export default App;

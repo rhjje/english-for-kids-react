@@ -8,7 +8,7 @@ interface Props {
   page: string | null;
 }
 
-const FinalPageGameOver: FC<Props> = ({ mistakes, page }) => (
+export const FinalPageGameOver: FC<Props> = ({ mistakes, page }) => (
   <section className="final-page">
     <span className="final-page__title">
       You lost(: Train and try again!
@@ -21,5 +21,3 @@ const FinalPageGameOver: FC<Props> = ({ mistakes, page }) => (
     <ButtonsFinish page={page} />
   </section>
 );
-
-export default FinalPageGameOver;

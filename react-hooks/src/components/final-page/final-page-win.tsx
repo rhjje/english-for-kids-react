@@ -7,7 +7,7 @@ interface Props {
   page: string | null;
 }
 
-const FinalPageWin: FC<Props> = ({ page }) => (
+export const FinalPageWin: FC<Props> = ({ page }) => (
   <section className="final-page">
     <span className="final-page__title">Congratulations! You win!</span>
     <div className="final-page__image">
@@ -16,5 +16,3 @@ const FinalPageWin: FC<Props> = ({ page }) => (
     <ButtonsFinish page={page} />
   </section>
 );
-
-export default FinalPageWin;
