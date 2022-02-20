@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ButtonsFinish from './buttons-finish';
+import { failure } from 'assets/illustrations';
 import './final-page.scss';
-import failure from '../../assets/icons/failure.svg';
 
 interface Props {
   mistakes: number | null;

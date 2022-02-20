@@ -10,8 +10,7 @@ import './game-field.scss';
 import { countingStatistics } from '../statistics/statistics';
 
 import data from '../../assets/JSON/cards.json';
-import star from '../../assets/icons/star-win.svg';
-import emptyStar from '../../assets/icons/star.svg';
+import { starWin, star } from 'assets/illustrations';
 
 // interface Props {
 //   onCountMistakes: () => void;
@@ -73,7 +72,7 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
           wordsUsed.push(card.getAttribute('data-name'));
 
           const stars = document.createElement('img');
-          stars.src = star;
+          stars.src = starWin;
           scoreRef.current.append(stars);
 
           if (currentWord < words.length) {
@@ -92,7 +91,7 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
           }
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
           const stars = document.createElement('img');
-          stars.src = emptyStar;
+          stars.src = star;
           scoreRef.current.append(stars);
           error.play();
           countingStatistics(`${words[currentWord]}`, 'wrong');
@@ -134,7 +133,11 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
   }
   return (
     <div className="game-field">
-      <GameMode gameMode={gameMode} handleChange={() => setGameMode(!gameMode)} key={id} />
+      <GameMode
+        gameMode={gameMode}
+        handleChange={() => setGameMode(!gameMode)}
+        key={id}
+      />
       <div className="cards">
         {cards.map((card) => (
           <Card
@@ -147,7 +150,11 @@ const GameField = ({ onCountMistakes, onSetPage }) => {
           />
         ))}
       </div>
-      {gameMode ? <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} /> : ''}
+      {gameMode ? (
+        <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} />
+      ) : (
+        ''
+      )}
       <div className="game-score" ref={scoreRef} />
     </div>
   );

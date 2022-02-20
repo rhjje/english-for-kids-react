@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ButtonsFinish from './buttons-finish';
+import { success } from 'assets/illustrations';
 import './final-page.scss';
-import success from '../../assets/icons/success.svg';
 
 interface Props {
   page: string | null;

@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import telegram from '../../assets/icons/telegram.svg';
-import github from '../../assets/icons/github.svg';
+import { telegram, github } from 'assets/illustrations';
 import styles from './footer.module.scss';
 
 export const Footer: FC = () => {
