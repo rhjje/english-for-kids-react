@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import StatisticsButtons from './components/StatisticsButtons';
+import { Button } from 'components/Button';
 import './Statistics.scss';
 import cards from '../../assets/JSON/cards.json';
 
@@ -166,7 +166,10 @@ const Statistics = () => {
 
   return (
     <div className="statistics">
-      <StatisticsButtons onClickReset={handleClickReset} />
+      <div className="statistics-buttons">
+        <Button to="/repeat-difficult-words">Repeat difficult words</Button>
+        <Button onClick={handleClickReset}>Reset</Button>
+      </div>
       <div className="statistics-table">
         <table className="statistics-table__header">
           <thead>

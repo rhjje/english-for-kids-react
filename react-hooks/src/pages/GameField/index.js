@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import Card from './components/Card';
 import GameMode from './components/GameMode';
 import ButtonPlay from './components/ButtonPlay';
-import { MainMenu } from 'components/final-page/buttons-finish';
+import { Button } from 'components/Button';
 import './GameField.scss';
 
 import { countingStatistics } from '../Statistics';
@@ -127,7 +127,7 @@ export const GameField = ({ onCountMistakes, onSetPage }) => {
     return (
       <div className="notification">
         <div className="error-message">There are no words yet :)</div>
-        <MainMenu />
+        <Button to="/">Main menu</Button>
       </div>
     );
   }

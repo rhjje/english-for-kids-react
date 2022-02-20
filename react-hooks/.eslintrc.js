@@ -40,6 +40,8 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'import/no-unresolved': 'off',
     'import/order': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
