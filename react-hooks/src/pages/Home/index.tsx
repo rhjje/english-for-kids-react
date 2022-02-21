@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
-import { Preloader } from 'components/preloader/preloader';
+import { Preloader } from 'components/preloader';
 import data from '../../assets/JSON/cards.json';
 import styles from './Home.module.scss';
 
