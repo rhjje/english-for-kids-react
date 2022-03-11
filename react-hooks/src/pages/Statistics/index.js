@@ -48,8 +48,8 @@ const countingStatistics = (word, category) => {
       }
       if (item.wrong + item.correct > 0) {
         item.percent = +(
-          (item.wrong * 100)
-          / (item.wrong + item.correct)
+          (item.wrong * 100) /
+          (item.wrong + item.correct)
         ).toFixed(1);
       }
     }
