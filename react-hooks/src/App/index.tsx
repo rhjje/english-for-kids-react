@@ -5,7 +5,8 @@ import { Home } from 'pages/Home';
 import { GameField } from 'pages/GameField';
 import { FinalPageWin } from 'components/final-page/final-page-win';
 import { FinalPageGameOver } from 'components/final-page/final-page-game-over';
-import { Statistics, setLocalStorage } from 'pages/Statistics';
+import { Statistics } from 'pages/Statistics';
+import { setLocalStorage } from 'utils/setLocalStorage';
 import './App.scss';
 
 export const App = () => {

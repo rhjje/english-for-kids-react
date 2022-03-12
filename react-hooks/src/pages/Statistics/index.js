@@ -1,33 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from 'components/Button';
 import './Statistics.scss';
-import cards from '../../assets/JSON/cards.json';
-
-const setLocalStorage = () => {
-  const array = [];
-  for (const key in cards) {
-    if (Object.prototype.hasOwnProperty.call(cards, key)) {
-      array.push(cards[key]);
-    }
-  }
-  const flatArray = array.flat();
-  flatArray.sort((a, b) => (a.word > b.word ? 1 : -1));
-  const statistics = [];
-  flatArray.forEach((item) => {
-    const currentObj = {
-      word: item.word,
-      translation: item.translation,
-      category: item.category,
-      clicks: 0,
-      correct: 0,
-      wrong: 0,
-      percent: 0,
-      image: item.image,
-    };
-    statistics.push(currentObj);
-  });
-  localStorage.setItem('data', JSON.stringify(statistics));
-};
 
 const countingStatistics = (word, category) => {
   const data = JSON.parse(localStorage.getItem('data'));
@@ -224,4 +197,4 @@ const Statistics = () => {
   );
 };
 
-export { countingStatistics, setLocalStorage, Statistics };
+export { countingStatistics, Statistics };
