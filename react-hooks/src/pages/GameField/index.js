@@ -81,12 +81,11 @@ export const GameField = ({ onCountMistakes, onSetPage }) => {
             setTimeout(() => {
               if (mistakes > 0) {
                 failure.play();
-                onCountMistakes(mistakes);
-                history.push('/final-page-game-over');
               } else {
                 success.play();
-                history.push('/final-page-win');
               }
+              onCountMistakes(mistakes);
+              history.push('/final-page');
             }, 1000);
           }
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {

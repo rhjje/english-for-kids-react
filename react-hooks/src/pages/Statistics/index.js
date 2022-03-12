@@ -22,7 +22,7 @@ const sortTable = (field, direction) => {
   localStorage.setItem('data', JSON.stringify(data));
 };
 
-const Statistics = () => {
+export const Statistics = () => {
   const [storage, setStorage] = useState(
     JSON.parse(localStorage.getItem('data')),
   );
@@ -168,5 +168,3 @@ const Statistics = () => {
     </div>
   );
 };
-
-export { Statistics };

@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AppLayout } from 'layouts/AppLayout';
 import { Home } from 'pages/Home';
 import { GameField } from 'pages/GameField';
-import { FinalPageWin } from 'components/final-page/final-page-win';
-import { FinalPageGameOver } from 'components/final-page/final-page-game-over';
+import { FinalPage } from 'pages/FinalPage';
 import { Statistics } from 'pages/Statistics';
 import { setLocalStorage } from 'utils/setLocalStorage';
 import './App.scss';
@@ -24,11 +23,8 @@ export const App = () => {
       <AppLayout>
         <Switch>
           <Route path="/statistics" component={Statistics} />
-          <Route path="/final-page-game-over">
-            <FinalPageGameOver mistakes={mistakes} page={currentPage} />
-          </Route>
-          <Route path="/final-page-win" component={FinalPageWin}>
-            <FinalPageWin page={currentPage} />
+          <Route path="/final-page">
+            <FinalPage page={currentPage} mistakes={mistakes} />
           </Route>
           <Route path="/:id">
             <GameField
