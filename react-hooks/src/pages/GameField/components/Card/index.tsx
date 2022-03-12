@@ -1,6 +1,6 @@
 import { useState, MouseEvent, FC } from 'react';
+import { countingStatistics } from 'utils/countingStatistics';
 import './Card.scss';
-import { countingStatistics } from '../../../Statistics';
 
 interface Props {
   word: string;

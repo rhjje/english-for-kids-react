@@ -1,26 +1,5 @@
+import { Categories, Statistics } from 'types/types';
 import data from '../assets/JSON/cards.json';
-
-interface Card {
-  category: string;
-  image: string;
-  translation: string;
-  word: string;
-}
-
-interface Categories {
-  [key: string]: Card[];
-}
-
-interface Statistics {
-  word: string;
-  translation: string;
-  category: string;
-  clicks: number;
-  correct: number;
-  wrong: number;
-  percent: number;
-  image: string;
-}
 
 export const setLocalStorage = () => {
   const cards: Categories = JSON.parse(JSON.stringify(data));

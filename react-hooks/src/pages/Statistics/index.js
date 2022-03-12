@@ -2,34 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from 'components/Button';
 import './Statistics.scss';
 
-const countingStatistics = (word, category) => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  data.forEach((item) => {
-    if (item.word === word) {
-      switch (category) {
-        case 'clicks':
-          item.clicks += 1;
-          break;
-        case 'correct':
-          item.correct += 1;
-          break;
-        case 'wrong':
-          item.wrong += 1;
-          break;
-        default:
-          break;
-      }
-      if (item.wrong + item.correct > 0) {
-        item.percent = +(
-          (item.wrong * 100) /
-          (item.wrong + item.correct)
-        ).toFixed(1);
-      }
-    }
-  });
-  localStorage.setItem('data', JSON.stringify(data));
-};
-
 const formingListWords = () => {
   const data = JSON.parse(localStorage.getItem('data'));
   data.sort((a, b) => (a.wrong > b.wrong ? -1 : 1));
@@ -197,4 +169,4 @@ const Statistics = () => {
   );
 };
 
-export { countingStatistics, Statistics };
+export { Statistics };

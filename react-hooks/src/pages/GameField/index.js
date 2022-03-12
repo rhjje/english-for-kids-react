@@ -7,7 +7,7 @@ import ButtonPlay from './components/ButtonPlay';
 import { Button } from 'components/Button';
 import './GameField.scss';
 
-import { countingStatistics } from '../Statistics';
+import { countingStatistics } from 'utils/countingStatistics';
 
 import data from '../../assets/JSON/cards.json';
 import { starWin, star } from 'assets/illustrations';
