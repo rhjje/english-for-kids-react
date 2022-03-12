@@ -6,7 +6,7 @@ import { GameField } from 'pages/GameField';
 import { FinalPageWin } from 'components/final-page/final-page-win';
 import { FinalPageGameOver } from 'components/final-page/final-page-game-over';
 import { Statistics, setLocalStorage } from 'pages/Statistics';
-import './app.scss';
+import './App.scss';
 
 export const App = () => {
   const [currentPage, setCurrentPage] = useState(null);

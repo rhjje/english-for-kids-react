@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
-import { Preloader } from 'components/preloader';
+import { Preloader } from 'components/Preloader';
 import data from '../../assets/JSON/cards.json';
 import styles from './Home.module.scss';
 
@@ -10,7 +10,7 @@ interface ISections {
   [key: string]: string;
 }
 
-export const Home: FC = () => {
+export const Home = () => {
   const [uploadedImages, setUploadedImages] = useState<number>(0);
   const [sections, setSections] = useState<ISections[]>([]);
 
@@ -33,33 +33,33 @@ export const Home: FC = () => {
   }, []);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.Main}>
       <div
-        className={classNames(styles.preloader, {
-          [styles.disabled]: uploadedImages === 8,
+        className={classNames(styles.Preloader, {
+          [styles.Disabled]: uploadedImages === 8,
         })}
       >
         <Preloader />
       </div>
 
       <div
-        className={classNames(styles.menu, {
-          [styles.disabled]: uploadedImages !== 8,
+        className={classNames(styles.Menu, {
+          [styles.Disabled]: uploadedImages !== 8,
         })}
       >
         {sections.map((item) => (
-          <div className={styles['menu-item']} key={item.key}>
-            <Link to={`/${item.link}`} className={styles.image}>
+          <div className={styles.MenuItem} key={item.key}>
+            <Link to={`/${item.link}`} className={styles.Image}>
               <img
                 onLoad={() => setUploadedImages((prevState) => prevState + 1)}
                 src={item.image}
                 alt={item.category}
               />
             </Link>
-            <div className={styles.name}>{item.category}</div>
+            <div className={styles.Name}>{item.category}</div>
           </div>
         ))}
-        <div className={styles.subtitle}>Hello! choose a category:</div>
+        <div className={styles.Subtitle}>Hello! choose a category:</div>
       </div>
     </div>
   );
