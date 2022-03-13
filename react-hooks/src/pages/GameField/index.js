@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-
-import Card from './components/Card';
+import { Card } from './components/Card';
 import GameMode from './components/GameMode';
 import ButtonPlay from './components/ButtonPlay';
 import { Button } from 'components/Button';

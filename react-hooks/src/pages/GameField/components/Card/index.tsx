@@ -1,8 +1,9 @@
-import { useState, MouseEvent, FC } from 'react';
+import { useState, useRef, MouseEvent } from 'react';
+import classNames from 'classnames';
 import { countingStatistics } from 'utils/countingStatistics';
-import './Card.scss';
+import styles from './Card.module.scss';
 
-interface Props {
+interface CardProps {
   word: string;
   translation: string;
   image: string;
@@ -10,62 +11,67 @@ interface Props {
   cardRef: any;
 }
 
-const Card: FC<Props> = ({ word, translation, image, gameMode, cardRef }) => {
+export const Card = ({
+  word,
+  translation,
+  image,
+  gameMode,
+  cardRef,
+}: CardProps) => {
   const [flipped, setFlipped] = useState(false);
-  const [rotation] = useState(
-    `rotate(${(Math.random() * (3 - -3) - 3).toFixed(1)}deg)`,
-  );
+  const {
+    current: { rotation, audio },
+  } = useRef({
+    rotation: `rotate(${(Math.random() * (3 - -3) - 3).toFixed(1)}deg)`,
+    audio: new Audio(`./sounds/${word}.mp3`),
+  });
 
-  const audio = new Audio(`./sounds/${word}.mp3`);
-  const classFront = `card-word__front${
-    flipped ? ' card-word__front_flipped' : ''
-  }`;
-  const classBack = `card-word__back${
-    flipped ? ' card-word__back_flipped' : ''
-  }`;
-  const classImage = `card-word__front-image${
-    gameMode ? ' card-word__front-image_active' : ''
-  }`;
-
-  const handleClickCard = (event: MouseEvent) => {
-    const target = event.target as Element;
-    if (!target.classList.contains('reverse-button') && !gameMode) {
-      countingStatistics(`${word}`, 'clicks');
+  const handleClickCard = (event: MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    if (target.localName !== 'button' && !gameMode) {
+      countingStatistics(word, 'clicks');
       audio.play();
     }
   };
 
   return (
     <div
-      className="card-word active-card"
+      className={styles.Card}
       onMouseLeave={() => setFlipped(false)}
-      style={{ transform: `${rotation}` }}
+      style={{ transform: rotation }}
     >
       <div
-        className={classFront}
-        data-number="1"
+        className={classNames(
+          styles.FrontSide,
+          flipped && styles.FrontSideFlipped,
+        )}
         data-name={word}
         onClick={handleClickCard}
         ref={cardRef}
       >
-        <div className={classImage}>
+        <div
+          className={classNames(styles.Image, gameMode && styles.ImageActive)}
+        >
           <img src={image} alt={word} />
         </div>
-        <div className="card-word__front-name">{word}</div>
-        <div
-          className="reverse-button"
-          data-number="1"
+        <div className={styles.Word}>{word}</div>
+        <button
+          className={styles.Button}
+          type="button"
           onClick={() => setFlipped(true)}
         />
       </div>
-      <div className={classBack}>
-        <div className="card-word__back-image">
+      <div
+        className={classNames(
+          styles.BackSide,
+          flipped && styles.BackSideFlipped,
+        )}
+      >
+        <div className={styles.Image}>
           <img src={image} alt={translation} />
         </div>
-        <div className="card-word__back-name">{translation}</div>
+        <div className={styles.Word}>{translation}</div>
       </div>
     </div>
   );
 };
-
-export default Card;
