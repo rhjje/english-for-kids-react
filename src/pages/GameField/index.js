@@ -148,10 +148,8 @@ export const GameField = ({ onCountMistakes, onSetPage }) => {
           />
         ))}
       </div>
-      {gameMode ? (
+      {gameMode && (
         <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} />
-      ) : (
-        ''
       )}
       <div className="game-score" ref={scoreRef} />
     </div>
