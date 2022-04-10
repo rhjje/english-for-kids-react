@@ -1,26 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from 'components/Button';
+import { formingListWords } from './utils/formingListWords';
+import { sortTable } from './utils/sortTable';
 import './Statistics.scss';
-
-const formingListWords = () => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  data.sort((a, b) => (a.wrong > b.wrong ? -1 : 1));
-  const array = [];
-  for (let i = 0; i < 8; i += 1) {
-    if (data[i].wrong > 0) array.push(data[i]);
-  }
-  localStorage.setItem('difficult-words', JSON.stringify(array));
-};
-
-const sortTable = (field, direction) => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  if (direction === 'back') {
-    data.sort((a, b) => (a[field] > b[field] ? -1 : 1));
-  } else {
-    data.sort((a, b) => (a[field] > b[field] ? 1 : -1));
-  }
-  localStorage.setItem('data', JSON.stringify(data));
-};
 
 export const Statistics = () => {
   const [storage, setStorage] = useState(
