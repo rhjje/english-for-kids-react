@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from 'components/Button';
 import { formingListWords } from './utils/formingListWords';
 import { sortTable } from './utils/sortTable';
-import './Statistics.scss';
+import styles from './Statistics.module.scss';
 
 export const Statistics = () => {
   const [storage, setStorage] = useState(
@@ -92,55 +92,86 @@ export const Statistics = () => {
   };
 
   return (
-    <div className="statistics">
-      <div className="statistics-buttons">
+    <div className={styles.Statistics}>
+      <div className={styles.Buttons}>
         <Button to="/repeat-difficult-words">Repeat difficult words</Button>
         <Button onClick={handleClickReset}>Reset</Button>
       </div>
-      <div className="statistics-table">
-        <table className="statistics-table__header">
-          <thead>
+      <div className={styles.Table}>
+        <table className={styles.TableHeader}>
+          <thead className={styles.TableHead}>
             <tr onClick={handleClickTh}>
-              <th ref={addThRef} data-value="word" data-direction="back">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="word"
+                data-direction="back"
+              >
                 ↓ Word
               </th>
               <th
+                className={styles.Cell}
                 ref={addThRef}
                 data-value="translation"
                 data-direction="forward"
               >
                 Translation
               </th>
-              <th ref={addThRef} data-value="category" data-direction="forward">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="category"
+                data-direction="forward"
+              >
                 Category
               </th>
-              <th ref={addThRef} data-value="clicks" data-direction="forward">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="clicks"
+                data-direction="forward"
+              >
                 Clicks
               </th>
-              <th ref={addThRef} data-value="correct" data-direction="forward">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="correct"
+                data-direction="forward"
+              >
                 Correct
               </th>
-              <th ref={addThRef} data-value="wrong" data-direction="forward">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="wrong"
+                data-direction="forward"
+              >
                 Wrong
               </th>
-              <th ref={addThRef} data-value="percent" data-direction="forward">
+              <th
+                className={styles.Cell}
+                ref={addThRef}
+                data-value="percent"
+                data-direction="forward"
+              >
                 % errors
               </th>
             </tr>
           </thead>
         </table>
-        <div className="statistics-table__body">
-          <table className="table">
+        <div className={styles.Main}>
+          <table className={styles.MainTable}>
             {storage.map((item) => (
-              <tbody key={item.word}>
+              <tbody className={styles.MainTableBody} key={item.word}>
                 <tr>
-                  <td>{item.word}</td>
-                  <td>{item.translation}</td>
-                  <td>{item.category}</td>
-                  <td>{item.clicks}</td>
-                  <td>{item.correct}</td>
-                  <td>{item.wrong}</td>
-                  <td>{item.percent}</td>
+                  <td className={styles.Cell}>{item.word}</td>
+                  <td className={styles.Cell}>{item.translation}</td>
+                  <td className={styles.Cell}>{item.category}</td>
+                  <td className={styles.Cell}>{item.clicks}</td>
+                  <td className={styles.Cell}>{item.correct}</td>
+                  <td className={styles.Cell}>{item.wrong}</td>
+                  <td className={styles.Cell}>{item.percent}</td>
                 </tr>
               </tbody>
             ))}

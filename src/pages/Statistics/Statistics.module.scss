@@ -1,4 +1,4 @@
-.statistics {
+.Statistics {
   height: calc(100vh - 30px);
   padding-top: 30px;
   display: flex;
@@ -7,44 +7,52 @@
   row-gap: 30px;
 }
 
-.statistics-buttons {
+.Buttons {
   width: 320px;
   display: flex;
   justify-content: space-between;
 }
 
-.statistics-table {
+.Table {
   width: 80vw;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.statistics-table__header {
+.TableHeader {
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
   border-collapse: collapse;
-}
 
-.statistics-table__body {
-  height: calc(100vh - 250px);
-  overflow-y: scroll;
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .Cell {
+    user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
-tbody:nth-child(2n + 1) {
-  background-color: rgb(231, 204, 181);
-}
-
-thead {
+.TableHead {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   background-color: #afaa9b;
 }
 
-th,
-td {
+.Main {
+  height: calc(100vh - 250px);
+  overflow-y: scroll;
+}
+
+.MainTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.MainTableBody:nth-child(2n + 1) {
+  background-color: rgb(231, 204, 181);
+}
+
+.Cell {
   font-family: 'Roboto', sans-serif;
   height: 22px;
   text-align: center;
@@ -53,45 +61,33 @@ td {
   line-height: 160%;
 }
 
-th:nth-child(1),
-th:nth-child(2),
-th:nth-child(3),
-td:nth-child(1),
-td:nth-child(2),
-td:nth-child(3) {
+.Cell:nth-child(1),
+.Cell:nth-child(2),
+.Cell:nth-child(3) {
   width: 20%;
 }
 
-th:nth-child(4),
-th:nth-child(5),
-th:nth-child(6),
-th:nth-child(7),
-td:nth-child(4),
-td:nth-child(5),
-td:nth-child(6),
-td:nth-child(7) {
+.Cell:nth-child(4),
+.Cell:nth-child(5),
+.Cell:nth-child(6),
+.Cell:nth-child(7) {
   width: 10%;
-}
-
-th {
-  user-select: none;
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
+
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (max-height: 700px) {
-  .statistics-buttons {
+  .Buttons {
     width: 270px;
   }
 }
