@@ -1,9 +1,11 @@
-export const sortTable = (field, direction) => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  if (direction === 'back') {
-    data.sort((a, b) => (a[field] > b[field] ? -1 : 1));
+export const sortTable = (data, field, direction) => {
+  const newData = JSON.parse(JSON.stringify(data));
+  if (direction) {
+    newData.sort((a, b) => (a[field] >= b[field] ? 1 : -1));
   } else {
-    data.sort((a, b) => (a[field] > b[field] ? 1 : -1));
+    newData.sort((a, b) => (a[field] >= b[field] ? -1 : 1));
   }
-  localStorage.setItem('data', JSON.stringify(data));
+  localStorage.setItem('data', JSON.stringify(newData));
+
+  return newData;
 };
