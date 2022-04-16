@@ -1,3 +1,5 @@
+const capitilize = (string) => string[0].toUpperCase() + string.slice(1);
+
 export const sortTable = (data, field, direction) => {
   const newData = JSON.parse(JSON.stringify(data));
   if (direction) {
@@ -6,6 +8,10 @@ export const sortTable = (data, field, direction) => {
     newData.sort((a, b) => (a[field] >= b[field] ? -1 : 1));
   }
   localStorage.setItem('data', JSON.stringify(newData));
+  localStorage.setItem(
+    'activeCell',
+    JSON.stringify({ title: capitilize(field), direction }),
+  );
 
   return newData;
 };

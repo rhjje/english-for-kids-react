@@ -27,8 +27,8 @@ export const Statistics = () => {
 
   useEffect(() => {
     if (localStorage.getItem('data')) {
-      sortTable(storage, 'word', 'forward');
       formingListWords();
+      setActiveCell(JSON.parse(localStorage.getItem('activeCell')));
       setStorage(JSON.parse(localStorage.getItem('data')));
     }
   }, []);
