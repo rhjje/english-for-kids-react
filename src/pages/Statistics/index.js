@@ -16,105 +16,112 @@ const cells = [
 ];
 
 export const Statistics = () => {
-  const [storage, setStorage] = useState(
-    JSON.parse(localStorage.getItem('data')),
-  );
-
-  const [activeCell, setActiveCell] = useState({
-    title: 'Word',
-    direction: true,
-  });
+  const [tableData, setTableData] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem('data')) {
+    const activeCell = JSON.parse(localStorage.getItem('activeCell'));
+    const data = JSON.parse(localStorage.getItem('data'));
+
+    if (activeCell && data) {
       formingListWords();
-      setActiveCell(JSON.parse(localStorage.getItem('activeCell')));
-      setStorage(JSON.parse(localStorage.getItem('data')));
+      setTableData({ activeCell, data });
     }
   }, []);
 
   const handleClickReset = () => {
     resetStorage();
-    setStorage(JSON.parse(localStorage.getItem('data')));
+    JSON.parse(localStorage.getItem('data'));
+    setTableData((prevState) => ({
+      ...prevState,
+      data: JSON.parse(localStorage.getItem('data')),
+    }));
   };
 
   const handleClickCell = (event) => {
-    if (event.target.innerText.includes(activeCell.title)) {
-      setActiveCell((prevState) => ({
-        ...prevState,
-        direction: !prevState.direction,
-      }));
-      setStorage((prevState) =>
-        sortTable(
-          prevState,
-          activeCell.title.toLowerCase(),
-          !activeCell.direction,
+    if (event.target.innerText.includes(tableData.activeCell.title)) {
+      setTableData((prevState) => ({
+        activeCell: {
+          ...prevState.activeCell,
+          direction: !prevState.activeCell.direction,
+        },
+        data: sortTable(
+          prevState.data,
+          prevState.activeCell.title.toLowerCase(),
+          !prevState.activeCell.direction,
         ),
-      );
+      }));
     } else {
-      setActiveCell({
-        title: event.target.innerText,
-        direction: true,
-      });
-      setStorage((prevState) =>
-        sortTable(prevState, event.target.innerText.toLowerCase(), true),
-      );
+      setTableData((prevState) => ({
+        activeCell: {
+          title: event.target.innerText,
+          direction: true,
+        },
+        data: sortTable(
+          prevState.data,
+          event.target.innerText.toLowerCase(),
+          true,
+        ),
+      }));
     }
   };
 
   return (
-    <div className={styles.Statistics}>
-      <div className={styles.Buttons}>
-        <Button to="/repeat-difficult-words">Repeat difficult words</Button>
-        <Button onClick={handleClickReset}>Reset</Button>
-      </div>
-      <div className={styles.Table}>
-        <table className={styles.TableHeader}>
-          <thead className={styles.TableHead}>
-            <tr>
-              {cells.map((cell) => {
-                if (cell === activeCell.title) {
+    tableData && (
+      <div className={styles.Statistics}>
+        <div className={styles.Buttons}>
+          <Button to="/repeat-difficult-words">Repeat difficult words</Button>
+          <Button onClick={handleClickReset}>Reset</Button>
+        </div>
+        <div className={styles.Table}>
+          <table className={styles.TableHeader}>
+            <thead className={styles.TableHead}>
+              <tr>
+                {cells.map((cell) => {
+                  if (cell === tableData.activeCell.title) {
+                    return (
+                      <th
+                        className={styles.Cell}
+                        onClick={handleClickCell}
+                        key={cell}
+                      >
+                        {`${
+                          tableData.activeCell.direction ? '↓' : '↑'
+                        } ${cell}`}
+                      </th>
+                    );
+                  }
                   return (
                     <th
                       className={styles.Cell}
                       onClick={handleClickCell}
                       key={cell}
                     >
-                      {`${activeCell.direction ? '↓' : '↑'} ${cell}`}
+                      {cell}
                     </th>
                   );
-                }
-                return (
-                  <th
-                    className={styles.Cell}
-                    onClick={handleClickCell}
-                    key={cell}
-                  >
-                    {cell}
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-        </table>
-        <div className={styles.Main}>
-          <table className={styles.MainTable}>
-            {storage.map((item) => (
-              <tbody className={styles.MainTableBody} key={item.word}>
-                <tr>
-                  <td className={styles.Cell}>{item.word}</td>
-                  <td className={styles.Cell}>{item.translation}</td>
-                  <td className={styles.Cell}>{item.category}</td>
-                  <td className={styles.Cell}>{item.clicks}</td>
-                  <td className={styles.Cell}>{item.correct}</td>
-                  <td className={styles.Cell}>{item.wrong}</td>
-                  <td className={styles.Cell}>{item.percent}</td>
-                </tr>
-              </tbody>
-            ))}
+                })}
+              </tr>
+            </thead>
           </table>
+          <div className={styles.Main}>
+            <table className={styles.MainTable}>
+              {tableData.data.map((item) => (
+                <tbody className={styles.MainTableBody} key={item.word}>
+                  <tr>
+                    <td className={styles.Cell}>{item.word}</td>
+                    <td className={styles.Cell}>{item.translation}</td>
+                    <td className={styles.Cell}>{item.category}</td>
+                    <td className={styles.Cell}>{item.clicks}</td>
+                    <td className={styles.Cell}>{item.correct}</td>
+                    <td className={styles.Cell}>{item.wrong}</td>
+                    <td className={styles.Cell}>{item.percent}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 };

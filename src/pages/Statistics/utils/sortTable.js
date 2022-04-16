@@ -1,4 +1,4 @@
-const capitilize = (string) => string[0].toUpperCase() + string.slice(1);
+const capitalize = (string) => string[0].toUpperCase() + string.slice(1);
 
 export const sortTable = (data, field, direction) => {
   const newData = JSON.parse(JSON.stringify(data));
@@ -10,7 +10,7 @@ export const sortTable = (data, field, direction) => {
   localStorage.setItem('data', JSON.stringify(newData));
   localStorage.setItem(
     'activeCell',
-    JSON.stringify({ title: capitilize(field), direction }),
+    JSON.stringify({ title: capitalize(field), direction }),
   );
 
   return newData;
