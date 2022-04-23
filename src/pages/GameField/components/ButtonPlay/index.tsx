@@ -1,19 +1,20 @@
-import { FC } from 'react';
-import './ButtonPlay.scss';
+import classNames from 'classnames';
+import styles from './ButtonPlay.module.scss';
 
-interface Props {
+interface ButtonPlayProps {
   buttonRepeat: boolean;
   onClick: () => void;
 }
 
-const ButtonPlay: FC<Props> = ({ buttonRepeat, onClick }) => (
+export const ButtonPlay = ({ buttonRepeat, onClick }: ButtonPlayProps) => (
   <button
     type="button"
-    className={`button-play${buttonRepeat ? ' button-play_repeat' : ''}`}
+    className={classNames(
+      styles.ButtonPlay,
+      buttonRepeat && styles.ButtonPlayRepeat,
+    )}
     onClick={onClick}
   >
     Start game
   </button>
 );
-
-export default ButtonPlay;

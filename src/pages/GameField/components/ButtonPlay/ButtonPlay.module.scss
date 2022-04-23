@@ -1,4 +1,4 @@
-.button-play {
+.ButtonPlay {
   width: 120px;
   height: 40px;
   font-size: 2.4rem;
@@ -17,7 +17,7 @@
   }
 }
 
-.button-play_repeat {
+.ButtonPlayRepeat {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -29,13 +29,13 @@
 }
 
 @media screen and (max-height: 850px) {
-  .button-play {
+  .ButtonPlay {
     margin: 10px 0 0;
   }
 }
 
 @media screen and (max-height: 700px) {
-  .button-play {
+  .ButtonPlay {
     width: 100px;
     height: 35px;
     outline: 4px solid rgba(209, 204, 204, 0.5);
@@ -43,7 +43,7 @@
     margin-top: 20px;
   }
 
-  .button-play_repeat {
+  .ButtonPlayRepeat {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -55,7 +55,7 @@
   }
 
   @media screen and (max-height: 550px) {
-    .button-play {
+    .ButtonPlay {
       margin-top: 5px;
     }
   }
