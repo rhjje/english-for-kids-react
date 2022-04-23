@@ -31,4 +31,11 @@ export const setLocalStorage = () => {
   });
 
   localStorage.setItem('data', JSON.stringify(statistics));
+  localStorage.setItem(
+    'activeCell',
+    JSON.stringify({
+      title: 'Word',
+      direction: true,
+    }),
+  );
 };
