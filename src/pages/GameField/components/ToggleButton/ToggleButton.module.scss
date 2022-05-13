@@ -1,10 +1,9 @@
-.mode {
+.ToggleButton {
   display: flex;
   align-items: center;
 }
 
-.mode__train,
-.mode__game {
+.Description {
   font-size: 2.8rem;
   font-weight: 700;
   padding: 10px;
@@ -12,26 +11,25 @@
   transition: 0.5s;
 }
 
-.mode__train_active,
-.mode__game_active {
+.DescriptionACtive {
   transition: 0.5s;
   opacity: 1;
 }
 
-.mode__switch {
+.Switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
 
-.mode__switch input {
+.SwitchField {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.SwitchRound {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -43,7 +41,7 @@
   transition: 0.5s;
 }
 
-.slider:before {
+.SwitchRound:before {
   position: absolute;
   content: '';
   height: 26px;
@@ -55,24 +53,24 @@
   transition: 0.5s;
 }
 
-input:checked + .slider {
+.SwitchField:checked + .SwitchRound {
   background-color: rgb(196, 63, 90);
 }
 
-input:focus + .slider {
+.SwitchField:focus + .SwitchRound {
   box-shadow: 0 0 1px rgb(196, 63, 90);
 }
 
-input:checked + .slider:before {
+.SwitchField:checked + .SwitchRound:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
-.slider.round {
+.SwitchRound {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.SwitchRound:before {
   border-radius: 50%;
 }

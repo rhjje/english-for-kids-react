@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Card } from './components/Card';
-import GameMode from './components/GameMode';
+import { ToggleButton } from './components/ToggleButton';
 import { ButtonPlay } from './components/ButtonPlay';
 import { Button } from 'components/Button';
 import './GameField.scss';
@@ -131,7 +131,7 @@ export const GameField = ({ onCountMistakes, onSetPage }) => {
   }
   return (
     <div className="game-field">
-      <GameMode
+      <ToggleButton
         gameMode={gameMode}
         handleChange={() => setGameMode(!gameMode)}
         key={id}
