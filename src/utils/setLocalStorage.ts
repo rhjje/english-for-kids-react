@@ -1,4 +1,5 @@
 import { Categories, Statistics } from 'types/types';
+import { defaultActiveCell } from './constants';
 import data from '../assets/JSON/cards.json';
 
 export const setLocalStorage = () => {
@@ -31,11 +32,5 @@ export const setLocalStorage = () => {
   });
 
   localStorage.setItem('data', JSON.stringify(statistics));
-  localStorage.setItem(
-    'activeCell',
-    JSON.stringify({
-      title: 'Word',
-      direction: true,
-    }),
-  );
+  localStorage.setItem('activeCell', JSON.stringify(defaultActiveCell));
 };

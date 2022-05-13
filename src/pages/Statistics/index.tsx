@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import { Button } from 'components/Button';
 import { formingListWords } from './utils/formingListWords';
 import { sortTable } from './utils/sortTable';
 import { resetStorage } from './utils/resetStorage';
+import { defaultActiveCell } from 'utils/constants';
 import styles from './Statistics.module.scss';
 
 const cells = [
@@ -19,48 +20,60 @@ export const Statistics = () => {
   const [tableData, setTableData] = useState(null);
 
   useEffect(() => {
-    const activeCell = JSON.parse(localStorage.getItem('activeCell'));
-    const data = JSON.parse(localStorage.getItem('data'));
+    const activeCell = JSON.parse(
+      localStorage.getItem('activeCell') || JSON.stringify(defaultActiveCell),
+    );
+    const data = JSON.parse(localStorage.getItem('data') || '[]');
 
     if (activeCell && data) {
       formingListWords();
+      // @ts-ignore
       setTableData({ activeCell, data });
     }
   }, []);
 
   const handleClickReset = () => {
     resetStorage();
+    // @ts-ignore
     JSON.parse(localStorage.getItem('data'));
     setTableData((prevState) => ({
+      // @ts-ignore
       ...prevState,
+      // @ts-ignore
       data: JSON.parse(localStorage.getItem('data')),
     }));
   };
 
-  const handleClickCell = (event) => {
-    if (event.target.innerText.includes(tableData.activeCell.title)) {
+  const handleClickCell = (event: MouseEvent<HTMLTableCellElement>) => {
+    const target = event.target as HTMLTableCellElement;
+    // @ts-ignore
+    if (target.innerText.includes(tableData.activeCell.title)) {
+      // @ts-ignore
       setTableData((prevState) => ({
         activeCell: {
+          // @ts-ignore
           ...prevState.activeCell,
+          // @ts-ignore
           direction: !prevState.activeCell.direction,
         },
         data: sortTable(
+          // @ts-ignore
           prevState.data,
+          // @ts-ignore
           prevState.activeCell.title.toLowerCase(),
+          // @ts-ignore
           !prevState.activeCell.direction,
         ),
       }));
     } else {
+      // @ts-ignore
       setTableData((prevState) => ({
         activeCell: {
-          title: event.target.innerText,
+          title: target.innerText,
           direction: true,
         },
-        data: sortTable(
-          prevState.data,
-          event.target.innerText.toLowerCase(),
-          true,
-        ),
+        // @ts-ignore
+        data: sortTable(prevState.data, target.innerText.toLowerCase(), true),
       }));
     }
   };
@@ -77,6 +90,7 @@ export const Statistics = () => {
             <thead className={styles.TableHead}>
               <tr>
                 {cells.map((cell) => {
+                  // @ts-ignore
                   if (cell === tableData.activeCell.title) {
                     return (
                       <th
@@ -85,6 +99,7 @@ export const Statistics = () => {
                         key={cell}
                       >
                         {`${
+                          // @ts-ignore
                           tableData.activeCell.direction ? '↓' : '↑'
                         } ${cell}`}
                       </th>
@@ -105,6 +120,7 @@ export const Statistics = () => {
           </table>
           <div className={styles.Main}>
             <table className={styles.MainTable}>
+              {/* @ts-ignore */}
               {tableData.data.map((item) => (
                 <tbody className={styles.MainTableBody} key={item.word}>
                   <tr>
