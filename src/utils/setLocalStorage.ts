@@ -1,4 +1,4 @@
-import { Categories, Statistics } from 'types/types';
+import { Categories, StatisticsItem } from 'types/types';
 import { defaultActiveCell } from './constants';
 import data from '../assets/JSON/cards.json';
 
@@ -15,7 +15,7 @@ export const setLocalStorage = () => {
   const flatArray = array.flat();
   flatArray.sort((a, b) => (a.word > b.word ? 1 : -1));
 
-  const statistics: Statistics[] = [];
+  const statistics: StatisticsItem[] = [];
 
   flatArray.forEach((item) => {
     const currentObj = {

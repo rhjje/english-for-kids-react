@@ -1,8 +1,8 @@
-import { Statistics } from 'types/types';
+import { StatisticsItem } from 'types/types';
 
 export const countingStatistics = (word: string, category: string) => {
   const data = JSON.parse(localStorage.getItem('data') || '[]');
-  data.forEach((item: Statistics) => {
+  data.forEach((item: StatisticsItem) => {
     if (item.word === word) {
       switch (category) {
         case 'clicks':

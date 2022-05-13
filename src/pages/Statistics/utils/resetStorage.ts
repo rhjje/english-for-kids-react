@@ -1,6 +1,8 @@
+import { StatisticsItem } from 'types/types';
+
 export const resetStorage = () => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  const resetArray = data.map((item) => ({
+  const data = JSON.parse(localStorage.getItem('data') || '[]');
+  const resetArray = data.map((item: StatisticsItem) => ({
     word: item.word,
     translation: item.translation,
     category: item.category,
@@ -11,5 +13,5 @@ export const resetStorage = () => {
     image: item.image,
   }));
   localStorage.setItem('data', JSON.stringify(resetArray));
-  localStorage.setItem('difficult-words', JSON.stringify([]));
+  localStorage.setItem('difficult-words', '[]');
 };

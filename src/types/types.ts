@@ -9,7 +9,7 @@ export interface Categories {
   [key: string]: Card[];
 }
 
-export interface Statistics {
+export interface StatisticsItem {
   word: string;
   translation: string;
   category: string;
