@@ -4,6 +4,7 @@ import { formingListWords } from './utils/formingListWords';
 import { sortTable } from './utils/sortTable';
 import { resetStorage } from './utils/resetStorage';
 import { defaultActiveCell } from 'utils/constants';
+import { Nullable, ActiveCell, StatisticsItem } from 'types/types';
 import styles from './Statistics.module.scss';
 
 const cells = [
@@ -16,8 +17,13 @@ const cells = [
   '% errors',
 ];
 
+interface TableData {
+  activeCell: ActiveCell;
+  data: StatisticsItem[];
+}
+
 export const Statistics = () => {
-  const [tableData, setTableData] = useState(null);
+  const [tableData, setTableData] = useState<Nullable<TableData>>(null);
 
   useEffect(() => {
     const activeCell = JSON.parse(
@@ -27,53 +33,49 @@ export const Statistics = () => {
 
     if (activeCell && data) {
       formingListWords();
-      // @ts-ignore
       setTableData({ activeCell, data });
     }
   }, []);
 
   const handleClickReset = () => {
     resetStorage();
-    // @ts-ignore
-    JSON.parse(localStorage.getItem('data'));
     setTableData((prevState) => ({
-      // @ts-ignore
-      ...prevState,
-      // @ts-ignore
-      data: JSON.parse(localStorage.getItem('data')),
+      activeCell: {
+        ...prevState?.activeCell,
+      } as ActiveCell,
+      data: JSON.parse(localStorage.getItem('data') || '[]'),
     }));
   };
 
   const handleClickCell = (event: MouseEvent<HTMLTableCellElement>) => {
     const target = event.target as HTMLTableCellElement;
-    // @ts-ignore
-    if (target.innerText.includes(tableData.activeCell.title)) {
-      // @ts-ignore
+
+    if (
+      tableData !== null &&
+      target.innerText.includes(tableData.activeCell.title)
+    ) {
       setTableData((prevState) => ({
         activeCell: {
-          // @ts-ignore
-          ...prevState.activeCell,
-          // @ts-ignore
-          direction: !prevState.activeCell.direction,
-        },
+          ...prevState?.activeCell,
+          direction: !prevState?.activeCell.direction,
+        } as ActiveCell,
         data: sortTable(
-          // @ts-ignore
-          prevState.data,
-          // @ts-ignore
-          prevState.activeCell.title.toLowerCase(),
-          // @ts-ignore
-          !prevState.activeCell.direction,
+          prevState?.data as StatisticsItem[],
+          prevState?.activeCell.title.toLowerCase() as string,
+          !prevState?.activeCell.direction as boolean,
         ),
       }));
     } else {
-      // @ts-ignore
       setTableData((prevState) => ({
         activeCell: {
           title: target.innerText,
           direction: true,
         },
-        // @ts-ignore
-        data: sortTable(prevState.data, target.innerText.toLowerCase(), true),
+        data: sortTable(
+          prevState?.data as StatisticsItem[],
+          target.innerText.toLowerCase(),
+          true,
+        ),
       }));
     }
   };
@@ -90,7 +92,6 @@ export const Statistics = () => {
             <thead className={styles.TableHead}>
               <tr>
                 {cells.map((cell) => {
-                  // @ts-ignore
                   if (cell === tableData.activeCell.title) {
                     return (
                       <th
@@ -99,7 +100,6 @@ export const Statistics = () => {
                         key={cell}
                       >
                         {`${
-                          // @ts-ignore
                           tableData.activeCell.direction ? '↓' : '↑'
                         } ${cell}`}
                       </th>
@@ -120,7 +120,6 @@ export const Statistics = () => {
           </table>
           <div className={styles.Main}>
             <table className={styles.MainTable}>
-              {/* @ts-ignore */}
               {tableData.data.map((item) => (
                 <tbody className={styles.MainTableBody} key={item.word}>
                   <tr>

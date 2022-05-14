@@ -1,3 +1,5 @@
+export type Nullable<T> = T | null;
+
 export interface Card {
   category: string;
   image: string;
@@ -18,4 +20,9 @@ export interface StatisticsItem {
   wrong: number;
   percent: number;
   image: string;
+}
+
+export interface ActiveCell {
+  title: string;
+  direction: boolean;
 }
