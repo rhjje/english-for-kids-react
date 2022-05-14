@@ -6,11 +6,12 @@ import { GameField } from 'pages/GameField';
 import { FinalPage } from 'pages/FinalPage';
 import { Statistics } from 'pages/Statistics';
 import { setLocalStorage } from 'utils/setLocalStorage';
+import { Nullable } from 'types/types';
 import './App.scss';
 
 export const App = () => {
-  const [currentPage, setCurrentPage] = useState(null);
-  const [mistakes, setMistakes] = useState(null);
+  const [currentPage, setCurrentPage] = useState<Nullable<string>>(null);
+  const [mistakes, setMistakes] = useState<Nullable<number>>(null);
 
   useEffect(() => {
     if (!localStorage.getItem('data')) {
