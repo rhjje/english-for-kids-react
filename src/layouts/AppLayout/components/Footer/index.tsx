@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { telegram, github } from 'assets/illustrations';
 import styles from './Footer.module.scss';
 
-export const Footer: FC = () => {
+export const Footer = () => {
   const [year, setYear] = useState<number | null>(null);
 
   useEffect(() => {
@@ -11,21 +11,21 @@ export const Footer: FC = () => {
   }, []);
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.contacts}>
-        <a href="tg://resolve?domain=@rhjje" className={styles.telegram}>
+    <footer className={styles.Footer}>
+      <div className={styles.Contacts}>
+        <a href="tg://resolve?domain=@rhjje" className={styles.Contact}>
           <img src={telegram} alt="Telegram" />
         </a>
         <a
           href="https://github.com/rhjje"
-          className={styles.git}
+          className={styles.Contact}
           target="_blank"
           rel="noopener noreferrer"
         >
           <img src={github} alt="GitHub" />
         </a>
       </div>
-      <div className={styles.created}>{year}г.</div>
+      <div className={styles.Created}>{year}г.</div>
     </footer>
   );
 };

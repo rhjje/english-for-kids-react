@@ -1,4 +1,4 @@
-.title {
+.Title {
   font-size: 5rem;
   position: absolute;
   left: 120px;
@@ -10,7 +10,7 @@
   user-select: none;
 }
 
-.bg {
+.Bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -25,26 +25,26 @@
   }
 }
 
-.disabled {
+.BgDisabled {
   opacity: 0;
   z-index: -1;
 }
 
 @media screen and (max-height: 870px) {
-  .title {
+  .Title {
     top: 10px;
     font-size: 4.6rem;
   }
 }
 
 @media screen and (max-height: 700px) {
-  .title {
+  .Title {
     font-size: 4rem;
   }
 }
 
 @media screen and (max-height: 550px) {
-  .title {
+  .Title {
     left: 110px;
     top: 15px;
     font-size: 3rem;
