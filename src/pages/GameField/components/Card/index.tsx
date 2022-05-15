@@ -8,7 +8,7 @@ interface CardProps {
   translation: string;
   image: string;
   gameMode: boolean;
-  cardRef: any;
+  cardRef: (element: HTMLDivElement) => void;
 }
 
 export const Card = ({
