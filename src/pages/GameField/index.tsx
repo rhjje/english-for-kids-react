@@ -22,23 +22,24 @@ type ParamsRouter = {
 };
 
 export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
+  const { id } = useParams<ParamsRouter>();
+  const history = useHistory();
   const [gameMode, setGameMode] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState<Nullable<HTMLAudioElement>>(null);
-  const { id } = useParams<ParamsRouter>();
-  const history = useHistory();
-  const scoreRef = useRef<HTMLDivElement>(null);
+  const [stars, setStars] = useState<boolean[]>([]);
   const cardsRefs = useRef<HTMLDivElement[]>([]);
-  cardsRefs.current = [];
 
   useEffect(() => {
     onSetPage(id);
-  });
+  }, [id, onSetPage]);
 
   useEffect(() => {
-    setGameMode(false);
-    setRepeat(false);
-  }, [id]);
+    if (!gameMode) {
+      setRepeat(false);
+      setStars([]);
+    }
+  }, [gameMode]);
 
   const playGame = () => {
     const correct = new Audio('./sounds/correct.mp3');
@@ -76,11 +77,7 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
 
           currentWord += 1;
           wordsUsed.push(card.getAttribute('data-name'));
-
-          const stars = document.createElement('img');
-          stars.src = starWin;
-
-          scoreRef.current?.append(stars);
+          setStars((prevState) => [...prevState, true]);
 
           if (currentWord < words.length) {
             setTimeout(sayWord, 500);
@@ -96,9 +93,7 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
             }, 1000);
           }
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
-          const stars = document.createElement('img');
-          stars.src = star;
-          scoreRef.current?.append(stars);
+          setStars((prevState) => [...prevState, false]);
           error.play();
           countingStatistics(`${words[currentWord]}`, 'wrong');
           mistakes += 1;
@@ -160,7 +155,11 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
       {gameMode && (
         <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} />
       )}
-      <div className={styles.Scores} ref={scoreRef} />
+      <div className={styles.Scores}>
+        {stars.map((item) => (
+          <img src={item ? starWin : star} alt="" />
+        ))}
+      </div>
     </div>
   );
 };
