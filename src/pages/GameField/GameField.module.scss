@@ -1,4 +1,4 @@
-.game-field {
+.GameField {
   height: 100vh;
   margin: 0 auto;
   padding-top: 30px;
@@ -9,7 +9,7 @@
   row-gap: 30px;
 }
 
-.cards {
+.Cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -18,7 +18,7 @@
   animation-duration: 1s;
 }
 
-.game-score {
+.Scores {
   height: 50px;
   max-width: 700px;
   display: flex;
@@ -31,7 +31,7 @@
   }
 }
 
-.notification {
+.Notification {
   height: 100vh;
   margin: 0 auto;
   display: flex;
@@ -41,42 +41,42 @@
   row-gap: 50px;
 }
 
-.error-message {
+.Message {
   font-size: 5rem;
   text-align: center;
 }
 
 @media screen and (max-height: 930px) {
-  .game-field {
+  .GameField {
     padding-top: 15px;
     row-gap: 15px;
   }
 
-  .cards {
+  .Cards {
     column-gap: 50px;
     row-gap: 30px;
   }
 }
 
 @media screen and (max-height: 850px) {
-  .game-field {
+  .GameField {
     padding-top: 15px;
     row-gap: 0;
   }
 
-  .cards {
+  .Cards {
     column-gap: 60px;
     row-gap: 30px;
   }
 }
 
 @media screen and (max-height: 700px) {
-  .game-field {
+  .GameField {
     padding-top: 10px;
     max-width: 1000px;
   }
 
-  .game-score {
+  .Scores {
     height: 40px;
     img {
       height: 40px;
@@ -86,16 +86,16 @@
 }
 
 @media screen and (max-height: 550px) {
-  .game-field {
+  .GameField {
     max-width: 700px;
   }
 
-  .cards {
+  .Cards {
     column-gap: 30px;
     row-gap: 15px;
   }
 
-  .game-score {
+  .Scores {
     max-width: 320px;
   }
 }

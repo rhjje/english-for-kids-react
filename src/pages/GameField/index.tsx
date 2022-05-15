@@ -5,7 +5,7 @@ import { ToggleButton } from './components/ToggleButton';
 import { ButtonPlay } from './components/ButtonPlay';
 import { Button } from 'components/Button';
 import { Nullable, Card as CardTypes } from 'types/types';
-import './GameField.scss';
+import styles from './GameField.module.scss';
 
 import { countingStatistics } from 'utils/countingStatistics';
 
@@ -131,21 +131,21 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
 
   if (cards.length === 0) {
     return (
-      <div className="notification">
-        <div className="error-message">There are no words yet :)</div>
+      <div className={styles.Notification}>
+        <div className={styles.Message}>There are no words yet :)</div>
         <Button to="/">Main menu</Button>
       </div>
     );
   }
 
   return (
-    <div className="game-field">
+    <div className={styles.GameField}>
       <ToggleButton
         gameMode={gameMode}
         handleChange={() => setGameMode(!gameMode)}
         key={id}
       />
-      <div className="cards">
+      <div className={styles.Cards}>
         {cards.map((card) => (
           <Card
             cardRef={addCardRef}
@@ -160,7 +160,7 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
       {gameMode && (
         <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} />
       )}
-      <div className="game-score" ref={scoreRef} />
+      <div className={styles.Scores} ref={scoreRef} />
     </div>
   );
 };
