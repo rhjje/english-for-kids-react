@@ -4,7 +4,7 @@ import { Card } from './components/Card';
 import { ToggleButton } from './components/ToggleButton';
 import { ButtonPlay } from './components/ButtonPlay';
 import { Button } from 'components/Button';
-import { Nullable } from 'types/types';
+import { Nullable, Card as CardTypes } from 'types/types';
 import './GameField.scss';
 
 import { countingStatistics } from 'utils/countingStatistics';
@@ -27,7 +27,7 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
   const [audio, setAudio] = useState<Nullable<HTMLAudioElement>>(null);
   const { id } = useParams<ParamsRouter>();
   const history = useHistory();
-  const scoreRef = useRef(null);
+  const scoreRef = useRef<HTMLDivElement>(null);
   const cardsRefs = useRef<HTMLDivElement[]>([]);
   cardsRefs.current = [];
 
@@ -45,21 +45,20 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
     const error = new Audio('./sounds/error.mp3');
     const success = new Audio('./sounds/success.mp3');
     const failure = new Audio('./sounds/failure.mp3');
-    // @ts-ignore
-    const words = [];
+
+    const words: Nullable<string>[] = [];
     cardsRefs.current.forEach((card) => {
       words.push(card.getAttribute('data-name'));
     });
-    // @ts-ignore
+
     words.sort(() => Math.random() - 0.5);
 
     let currentWord = 0;
     let mistakes = 0;
-    // @ts-ignore
-    const wordsUsed = [];
+
+    const wordsUsed: Nullable<string>[] = [];
 
     const sayWord = () => {
-      // @ts-ignore
       const currentAudio = new Audio(`./sounds/${words[currentWord]}.mp3`);
       currentAudio.play();
       setAudio(currentAudio);
@@ -69,14 +68,10 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
 
     cardsRefs.current.forEach((card) => {
       card.addEventListener('click', () => {
-        // @ts-ignore
         if (card.getAttribute('data-name') === words[currentWord]) {
-          // @ts-ignore
           card.style.filter = 'blur(5px)';
-          // @ts-ignore
-          card.parentElement.classList.remove('active-card');
+          card.parentElement?.classList.remove('active-card');
           correct.play();
-          // @ts-ignore
           countingStatistics(`${words[currentWord]}`, 'correct');
 
           currentWord += 1;
@@ -84,8 +79,8 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
 
           const stars = document.createElement('img');
           stars.src = starWin;
-          // @ts-ignore
-          scoreRef.current.append(stars);
+
+          scoreRef.current?.append(stars);
 
           if (currentWord < words.length) {
             setTimeout(sayWord, 500);
@@ -99,14 +94,12 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
               onCountMistakes(mistakes);
               history.push('/final-page');
             }, 1000);
-          } // @ts-ignore
+          }
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
           const stars = document.createElement('img');
           stars.src = star;
-          // @ts-ignore
-          scoreRef.current.append(stars);
+          scoreRef.current?.append(stars);
           error.play();
-          // @ts-ignore
           countingStatistics(`${words[currentWord]}`, 'wrong');
           mistakes += 1;
         }
@@ -129,12 +122,11 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
     }
   };
 
-  let cards;
+  let cards: CardTypes[];
   if (id === 'repeat-difficult-words') {
     cards = JSON.parse(localStorage.getItem('difficult-words') || '[]');
   } else {
-    // @ts-ignore
-    cards = data[id];
+    cards = data[id as keyof typeof data];
   }
 
   if (cards.length === 0) {
@@ -154,7 +146,6 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
         key={id}
       />
       <div className="cards">
-        {/* @ts-ignore */}
         {cards.map((card) => (
           <Card
             cardRef={addCardRef}
