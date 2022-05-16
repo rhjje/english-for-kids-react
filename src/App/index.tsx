@@ -10,7 +10,6 @@ import { Nullable } from 'types/types';
 import './App.scss';
 
 export const App = () => {
-  const [currentPage, setCurrentPage] = useState<Nullable<string>>(null);
   const [mistakes, setMistakes] = useState<Nullable<number>>(null);
 
   useEffect(() => {
@@ -25,13 +24,10 @@ export const App = () => {
         <Switch>
           <Route path="/statistics" component={Statistics} />
           <Route path="/final-page">
-            <FinalPage page={currentPage} mistakes={mistakes} />
+            <FinalPage mistakes={mistakes} />
           </Route>
           <Route path="/:id">
-            <GameField
-              onCountMistakes={setMistakes}
-              onSetPage={setCurrentPage}
-            />
+            <GameField onCountMistakes={setMistakes} />
           </Route>
           <Route exact path="/" component={Home} />
         </Switch>

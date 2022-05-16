@@ -14,14 +14,13 @@ import { starWin, star } from 'assets/illustrations';
 
 interface GameFieldProps {
   onCountMistakes: (mistakes: number) => void;
-  onSetPage: (id: string) => void;
 }
 
 type ParamsRouter = {
   id: string;
 };
 
-export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
+export const GameField = ({ onCountMistakes }: GameFieldProps) => {
   const { id } = useParams<ParamsRouter>();
   const history = useHistory();
   const [gameMode, setGameMode] = useState(false);
@@ -29,10 +28,6 @@ export const GameField = ({ onCountMistakes, onSetPage }: GameFieldProps) => {
   const [audio, setAudio] = useState<Nullable<HTMLAudioElement>>(null);
   const [stars, setStars] = useState<boolean[]>([]);
   const cardsRefs = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    onSetPage(id);
-  }, [id, onSetPage]);
 
   useEffect(() => {
     if (!gameMode) {
