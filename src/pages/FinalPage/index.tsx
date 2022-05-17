@@ -1,10 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { failure, success } from 'assets/illustrations';
+import { Nullable } from 'types/types';
 import styles from './FinalPage.module.scss';
 
 interface FinalPageProps {
-  mistakes: number | null;
+  mistakes: Nullable<number>;
 }
 
 export const FinalPage = ({ mistakes }: FinalPageProps) => {

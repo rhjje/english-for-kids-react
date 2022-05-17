@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { telegram, github } from 'assets/illustrations';
+import { Nullable } from 'types/types';
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
-  const [year, setYear] = useState<number | null>(null);
+  const [year, setYear] = useState<Nullable<number>>(null);
 
   useEffect(() => {
     const data = new Date();
