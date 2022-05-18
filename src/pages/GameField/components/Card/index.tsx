@@ -1,4 +1,4 @@
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import classNames from 'classnames';
 import { countingStatistics } from 'utils/countingStatistics';
 import styles from './Card.module.scss';
@@ -19,12 +19,10 @@ export const Card = ({
   cardRef,
 }: CardProps) => {
   const [flipped, setFlipped] = useState(false);
-  const {
-    current: { rotation, audio },
-  } = useRef({
+  const [{ rotation, audio }] = useState(() => ({
     rotation: `rotate(${(Math.random() * (3 - -3) - 3).toFixed(1)}deg)`,
     audio: new Audio(`./sounds/${word}.mp3`),
-  });
+  }));
 
   const handleClickCard = (event: MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
