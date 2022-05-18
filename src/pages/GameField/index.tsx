@@ -27,7 +27,16 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState<Nullable<HTMLAudioElement>>(null);
   const [stars, setStars] = useState<boolean[]>([]);
+  const [cards, setCards] = useState<Nullable<CardTypes[]>>(null);
   const cardsRefs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    if (id === 'repeat-difficult-words') {
+      setCards(JSON.parse(localStorage.getItem('difficult-words') || '[]'));
+    } else {
+      setCards(data[id as keyof typeof data]);
+    }
+  }, [id]);
 
   useEffect(() => {
     if (!gameMode) {
@@ -42,12 +51,9 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
     const success = new Audio('./sounds/success.mp3');
     const failure = new Audio('./sounds/failure.mp3');
 
-    const words: Nullable<string>[] = [];
-    cardsRefs.current.forEach((card) => {
-      words.push(card.getAttribute('data-name'));
-    });
-
-    words.sort(() => Math.random() - 0.5);
+    const words: string[] = cards!
+      .map((card) => card.word)
+      .sort(() => Math.random() - 0.5);
 
     let currentWord = 0;
     let mistakes = 0;
@@ -112,14 +118,7 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
     }
   };
 
-  let cards: CardTypes[];
-  if (id === 'repeat-difficult-words') {
-    cards = JSON.parse(localStorage.getItem('difficult-words') || '[]');
-  } else {
-    cards = data[id as keyof typeof data];
-  }
-
-  if (cards.length === 0) {
+  if (cards?.length === 0) {
     return (
       <div className={styles.Notification}>
         <div className={styles.Message}>There are no words yet :)</div>
@@ -136,7 +135,7 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
         key={id}
       />
       <div className={styles.Cards}>
-        {cards.map((card) => (
+        {cards?.map((card) => (
           <Card
             cardRef={addCardRef}
             word={card.word}
@@ -151,8 +150,8 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
         <ButtonPlay buttonRepeat={repeat} onClick={handleClickPlay} />
       )}
       <div className={styles.Scores}>
-        {stars.map((item) => (
-          <img src={item ? starWin : star} alt="" />
+        {stars.map((item, i) => (
+          <img src={item ? starWin : star} alt="" key={i} />
         ))}
       </div>
     </div>
