@@ -1,4 +1,4 @@
-.button {
+.Button {
   width: 40px;
   position: absolute;
   left: -160px;
@@ -11,9 +11,9 @@
   }
 }
 
-.first-line,
-.second-line,
-.third-line {
+.FirstLine,
+.SecondLine,
+.ThirdLine {
   width: 40px;
   height: 3px;
   margin-top: 10px;
@@ -22,16 +22,16 @@
   border-radius: 1px;
 }
 
-.active {
-  .first-line {
+.ButtonActive {
+  .FirstLine {
     transform: translateY(13px) rotate(45deg);
   }
 
-  .second-line {
+  .SecondLine {
     transform: translateX(-40px);
   }
 
-  .third-line {
+  .ThirdLine {
     transform: translateY(-13px) rotate(-45deg);
   }
 }
