@@ -1,6 +1,6 @@
 import { AppState } from './store';
 
-export const reducer = (state: AppState) => state.reducer;
+export const reducer = (state: AppState) => state;
 
 export const stateMenu = (state: AppState) => reducer(state).stateMenu;
 export const stateGameMode = (state: AppState) => reducer(state).stateGameMode;
