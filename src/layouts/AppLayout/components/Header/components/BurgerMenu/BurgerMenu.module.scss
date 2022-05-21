@@ -1,4 +1,4 @@
-.burger-menu {
+.BurgerMenu {
   position: absolute;
   background-color: rgb(196, 63, 90);
   width: 80px;
@@ -11,83 +11,86 @@
   overflow: hidden;
 }
 
-.menu_open {
+.BurgerMenuActive {
   width: 320px;
   height: 710px;
   border-radius: 0 80px;
 }
 
-.navigation {
+.Navigation {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 60px;
 }
 
-.item {
+.NavigationItem {
   display: inline-block;
   width: 230px;
   margin-top: 10px;
   border-bottom: 2px solid hsla(0, 0%, 96%, 0.5);
   transform: scale(0);
   transition: 0.3s;
-  a {
-    color: whitesmoke;
-    margin-left: 10px;
-    line-height: 160%;
-    text-decoration: none;
-    font-size: 3rem;
-    opacity: 0.5;
+}
 
-    &:hover {
-      opacity: 1;
-    }
+.Link {
+  color: whitesmoke;
+  margin-left: 10px;
+  line-height: 160%;
+  text-decoration: none;
+  font-size: 3rem;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
   }
 }
 
-a.active {
+.LinkActive {
   opacity: 1;
   font-weight: 700;
   font-size: 3.4rem;
 }
 
-.item_open {
+.NavigationItemActive {
   transform: scale(1);
   transition: 1s;
 }
 
 @media screen and (max-height: 700px) {
-  .menu_open {
+  .BurgerMenuActive {
     width: 280px;
     height: 540px;
     border-radius: 0 60px;
   }
 
-  .item {
+  .NavigationItem {
     width: 210px;
-    a {
-      line-height: 140%;
-      font-size: 2.4rem;
-    }
+  }
+
+  .Link {
+    line-height: 140%;
+    font-size: 2.4rem;
   }
 }
 
 @media screen and (max-height: 550px) {
-  .menu_open {
+  .BurgerMenuActive {
     width: 250px;
     height: 450px;
     border-radius: 0 60px;
   }
 
-  .navigation {
+  .Navigation {
     margin-top: 50px;
   }
 
-  .item {
+  .NavigationItem {
     width: 180px;
-    a {
-      line-height: 140%;
-      font-size: 1.8rem;
-    }
+  }
+
+  .Link {
+    line-height: 140%;
+    font-size: 1.8rem;
   }
 }

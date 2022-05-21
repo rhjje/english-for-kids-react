@@ -1,28 +1,30 @@
-import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './BurgerMenu.module.scss';
 
-interface Props {
+interface BurgerMenuProps {
   menuState: boolean;
   closeMenu: () => void;
 }
 
-export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
-  const classItem = classNames(styles.item, { [styles.item_open]: menuState });
+export const BurgerMenu = ({ menuState, closeMenu }: BurgerMenuProps) => {
+  const classItem = classNames(styles.NavigationItem, {
+    [styles.NavigationItemActive]: menuState,
+  });
 
   return (
     <div
-      className={classNames(styles['burger-menu'], {
-        [styles.menu_open]: menuState,
+      className={classNames(styles.BurgerMenu, {
+        [styles.BurgerMenuActive]: menuState,
       })}
     >
-      <ul className={styles.navigation}>
+      <ul className={styles.Navigation}>
         <li className={classItem}>
           <NavLink
             to="/"
             exact
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Main page
@@ -31,7 +33,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/action-a"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Action (set A)
@@ -40,7 +43,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/action-b"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Action (set B)
@@ -49,7 +53,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/action-c"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Action (set C)
@@ -58,7 +63,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/adjective"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Adjective
@@ -67,7 +73,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/animal-a"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Animal (set A)
@@ -76,7 +83,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/animal-b"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Animal (set B)
@@ -85,7 +93,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/clothes"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Clothes
@@ -94,7 +103,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/emotion"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Emotion
@@ -103,7 +113,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, closeMenu }) => {
         <li className={classItem}>
           <NavLink
             to="/statistics"
-            activeClassName={styles.active}
+            className={styles.Link}
+            activeClassName={styles.LinkActive}
             onClick={closeMenu}
           >
             Statistics
