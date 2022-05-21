@@ -15,18 +15,11 @@ export const setRepeat = (payload: boolean) => ({
   payload,
 });
 
-export const addMistake = () => ({
-  type: ActionType.AddMistake as const,
-});
-
-export const resetMistakes = () => ({
-  type: ActionType.ResetMistakes as const,
+export const setMistakes = (payload: number) => ({
+  type: ActionType.SetMistakes as const,
+  payload,
 });
 
 export type Action = ReturnType<
-  | typeof setMenu
-  | typeof setGameMode
-  | typeof setRepeat
-  | typeof addMistake
-  | typeof resetMistakes
+  typeof setMenu | typeof setGameMode | typeof setRepeat | typeof setMistakes
 >;

@@ -23,10 +23,8 @@ export const reducer = (state = initialState, action: Action) => {
       return { ...state, stateGameMode: action.payload };
     case ActionType.SetRepeat:
       return { ...state, stateRepeat: action.payload };
-    case ActionType.AddMistake:
-      return { ...state, mistakes: state.mistakes + 1 };
-    case ActionType.ResetMistakes:
-      return { ...state, mistakes: 0 };
+    case ActionType.SetMistakes:
+      return { ...state, mistakes: action.payload };
     default:
       return state;
   }

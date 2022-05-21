@@ -1,15 +1,13 @@
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectors } from 'redux-react';
 import { Button } from 'components/Button';
 import { failure, success } from 'assets/illustrations';
-import { Nullable } from 'types/types';
 import styles from './FinalPage.module.scss';
 
-interface FinalPageProps {
-  mistakes: Nullable<number>;
-}
-
-export const FinalPage = ({ mistakes }: FinalPageProps) => {
+export const FinalPage = () => {
   const history = useHistory();
+  const mistakes = useSelector(selectors.mistakes);
 
   return (
     <section className={styles.FinalPage}>

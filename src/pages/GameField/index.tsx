@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actions } from 'redux-react';
 import { Card } from './components/Card';
 import { ToggleButton } from './components/ToggleButton';
 import { ButtonPlay } from './components/ButtonPlay';
@@ -12,15 +14,12 @@ import { countingStatistics } from 'utils/countingStatistics';
 import data from '../../assets/JSON/cards.json';
 import { starWin, star } from 'assets/illustrations';
 
-interface GameFieldProps {
-  onCountMistakes: (mistakes: number) => void;
-}
-
 type ParamsRouter = {
   id: string;
 };
 
-export const GameField = ({ onCountMistakes }: GameFieldProps) => {
+export const GameField = () => {
+  const dispatch = useDispatch();
   const { id } = useParams<ParamsRouter>();
   const history = useHistory();
   const [gameMode, setGameMode] = useState(false);
@@ -89,7 +88,7 @@ export const GameField = ({ onCountMistakes }: GameFieldProps) => {
               } else {
                 success.play();
               }
-              onCountMistakes(mistakes);
+              dispatch(actions.setMistakes(mistakes));
               history.push('/final-page');
             }, 1000);
           }
