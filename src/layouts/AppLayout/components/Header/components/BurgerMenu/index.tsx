@@ -3,19 +3,19 @@ import classNames from 'classnames';
 import styles from './BurgerMenu.module.scss';
 
 interface BurgerMenuProps {
-  menuState: boolean;
+  menuIsOpen: boolean;
   closeMenu: () => void;
 }
 
-export const BurgerMenu = ({ menuState, closeMenu }: BurgerMenuProps) => {
+export const BurgerMenu = ({ menuIsOpen, closeMenu }: BurgerMenuProps) => {
   const classItem = classNames(styles.NavigationItem, {
-    [styles.NavigationItemActive]: menuState,
+    [styles.NavigationItemActive]: menuIsOpen,
   });
 
   return (
     <div
       className={classNames(styles.BurgerMenu, {
-        [styles.BurgerMenuActive]: menuState,
+        [styles.BurgerMenuActive]: menuIsOpen,
       })}
     >
       <ul className={styles.Navigation}>

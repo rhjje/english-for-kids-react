@@ -1,18 +1,15 @@
+import { HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import styles from './BurgerButton.module.scss';
 
-interface BurgerButtonProps {
-  onClickButton: () => void;
-  menuOpen: boolean;
+interface BurgerButtonProps extends HTMLAttributes<HTMLDivElement> {
+  menuIsOpen: boolean;
 }
 
-export const BurgerButton = ({
-  onClickButton,
-  menuOpen,
-}: BurgerButtonProps) => (
+export const BurgerButton = ({ menuIsOpen, ...props }: BurgerButtonProps) => (
   <div
-    className={classNames(styles.Button, { [styles.ButtonActive]: menuOpen })}
-    onClick={onClickButton}
+    className={classNames(styles.Button, { [styles.ButtonActive]: menuIsOpen })}
+    {...props}
   >
     <div className={styles.FirstLine} />
     <div className={styles.SecondLine} />

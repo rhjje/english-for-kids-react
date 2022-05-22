@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import { Action } from './actions';
 import { ActionType } from './types';
 
@@ -15,7 +16,10 @@ const initialState: ReducerState = {
   mistakes: 0,
 };
 
-export const reducer = (state = initialState, action: Action) => {
+export const reducer: Reducer<ReducerState, Action> = (
+  state = initialState,
+  action,
+) => {
   switch (action.type) {
     case ActionType.SetMenu:
       return { ...state, stateMenu: action.payload };

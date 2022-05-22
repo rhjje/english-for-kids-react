@@ -11,8 +11,8 @@ export const Header = () => {
   return (
     <header>
       <BurgerButton
-        onClickButton={() => setMenuIsOpen(!menuIsOpen)}
-        menuOpen={menuIsOpen}
+        onClick={() => setMenuIsOpen((prevState) => !prevState)}
+        menuIsOpen={menuIsOpen}
       />
       {pathname === '/' ? (
         <h1 className={styles.Title}>English for Kids</h1>
@@ -22,12 +22,12 @@ export const Header = () => {
         </Link>
       )}
       <BurgerMenu
-        menuState={menuIsOpen}
-        closeMenu={() => setMenuIsOpen(!menuIsOpen)}
+        menuIsOpen={menuIsOpen}
+        closeMenu={() => setMenuIsOpen(false)}
       />
       <div
         className={menuIsOpen ? styles.Bg : styles.BgDisabled}
-        onClick={() => setMenuIsOpen(!menuIsOpen)}
+        onClick={() => setMenuIsOpen(false)}
       />
     </header>
   );
