@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 
-interface ButtonProps {
+interface ButtonProps
+  extends HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   to?: string;
   children: ReactNode;
-  [key: string]: any;
 }
 
 export const Button = ({ to, children, ...props }: ButtonProps) => {

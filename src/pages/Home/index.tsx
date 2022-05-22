@@ -6,13 +6,13 @@ import { Preloader } from 'components/Preloader';
 import data from '../../assets/JSON/cards.json';
 import styles from './Home.module.scss';
 
-interface ISections {
+interface Sections {
   [key: string]: string;
 }
 
 export const Home = () => {
   const [uploadedImages, setUploadedImages] = useState<number>(0);
-  const [sections, setSections] = useState<ISections[]>([]);
+  const [sections, setSections] = useState<Sections[]>([]);
 
   useEffect(() => {
     if (sessionStorage.getItem('sections')) {
@@ -22,7 +22,7 @@ export const Home = () => {
       const links = Object.keys(data);
       const array = Object.values(data).map((item, i) => {
         const randomIndex = Math.floor(Math.random() * item.length);
-        const randomItem: ISections = item[randomIndex];
+        const randomItem: Sections = item[randomIndex];
         randomItem.link = links[i];
         randomItem.key = uuidv4();
         return randomItem;
