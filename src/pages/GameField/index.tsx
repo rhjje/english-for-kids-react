@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { actions } from 'redux-react';
 import { Card } from './components/Card';
 import { ToggleButton } from './components/ToggleButton';
 import { ButtonPlay } from './components/ButtonPlay';
 import { Button } from 'components/Button';
 import { Nullable, Card as CardTypes } from 'types/types';
+import { Preloader } from 'components/Preloader';
 import styles from './GameField.module.scss';
 
 import { countingStatistics } from 'utils/countingStatistics';
@@ -22,6 +24,8 @@ export const GameField = () => {
   const dispatch = useDispatch();
   const { id } = useParams<ParamsRouter>();
   const history = useHistory();
+
+  const [loadedCards, setLoadedCards] = useState<number>(0);
   const [gameMode, setGameMode] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [audio, setAudio] = useState<Nullable<HTMLAudioElement>>(null);
@@ -117,6 +121,10 @@ export const GameField = () => {
     }
   };
 
+  const addLoadedCard = () => {
+    setLoadedCards((prevState) => prevState + 1);
+  };
+
   if (cards?.length === 0) {
     return (
       <div className={styles.Notification}>
@@ -133,7 +141,20 @@ export const GameField = () => {
         handleChange={() => setGameMode(!gameMode)}
         key={id}
       />
-      <div className={styles.Cards}>
+
+      <div
+        className={classNames(styles.Preloader, {
+          [styles.Disabled]: loadedCards === cards?.length,
+        })}
+      >
+        <Preloader />
+      </div>
+
+      <div
+        className={classNames(styles.Cards, {
+          [styles.Disabled]: loadedCards !== cards?.length,
+        })}
+      >
         {cards?.map((card) => (
           <Card
             cardRef={addCardRef}
@@ -142,6 +163,7 @@ export const GameField = () => {
             image={card.image}
             key={card.word}
             gameMode={gameMode}
+            addLoadedCard={addLoadedCard}
           />
         ))}
       </div>

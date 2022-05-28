@@ -9,6 +9,7 @@ interface CardProps {
   image: string;
   gameMode: boolean;
   cardRef: (element: HTMLDivElement) => void;
+  addLoadedCard: () => void;
 }
 
 export const Card = ({
@@ -17,6 +18,7 @@ export const Card = ({
   image,
   gameMode,
   cardRef,
+  addLoadedCard,
 }: CardProps) => {
   const [flipped, setFlipped] = useState(false);
   const [{ rotation, audio }] = useState(() => ({
@@ -50,7 +52,7 @@ export const Card = ({
         <div
           className={classNames(styles.Image, gameMode && styles.ImageActive)}
         >
-          <img src={image} alt={word} />
+          <img onLoad={addLoadedCard} src={image} alt={word} />
         </div>
         <div className={styles.Word}>{word}</div>
         <button
