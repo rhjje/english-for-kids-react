@@ -16,6 +16,11 @@ import { countingStatistics } from 'utils/countingStatistics';
 import data from '../../assets/JSON/cards.json';
 import { starWin, star } from 'assets/illustrations';
 
+const correct = new Audio('./sounds/correct.mp3');
+const error = new Audio('./sounds/error.mp3');
+const success = new Audio('./sounds/success.mp3');
+const failure = new Audio('./sounds/failure.mp3');
+
 type ParamsRouter = {
   id: string;
 };
@@ -49,11 +54,6 @@ export const GameField = () => {
   }, [gameMode]);
 
   const playGame = () => {
-    const correct = new Audio('./sounds/correct.mp3');
-    const error = new Audio('./sounds/error.mp3');
-    const success = new Audio('./sounds/success.mp3');
-    const failure = new Audio('./sounds/failure.mp3');
-
     const words: string[] = cards!
       .map((card) => card.word)
       .sort(() => Math.random() - 0.5);
