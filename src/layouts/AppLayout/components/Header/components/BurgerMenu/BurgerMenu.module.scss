@@ -1,6 +1,6 @@
 .BurgerMenu {
   position: absolute;
-  background-color: rgb(196, 63, 90);
+  background-color: var(--color-red);
   width: 80px;
   height: 80px;
   transition: 0.5s;
@@ -28,13 +28,13 @@
   display: inline-block;
   width: 230px;
   margin-top: 10px;
-  border-bottom: 2px solid hsla(0, 0%, 96%, 0.5);
+  border-bottom: 2px solid var(--color-border-navigation-item);
   transform: scale(0);
   transition: 0.3s;
 }
 
 .Link {
-  color: whitesmoke;
+  color: var(--color-whitesmoke);
   margin-left: 10px;
   line-height: 160%;
   text-decoration: none;

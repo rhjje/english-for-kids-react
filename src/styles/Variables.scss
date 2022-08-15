@@ -1,0 +1,22 @@
+:root {
+  --color-red: rgb(196, 63, 90);
+  --color-white: #ffffff;
+  --color-whitesmoke: whitesmoke;
+  --color-black: black;
+  --color-switch: #ccc;
+
+  --color-grey-border: rgba(209, 204, 204, 0.5);
+  --color-border-card: rgba(0, 0, 0, 0.5);
+  --color-border-navigation-item: hsla(0, 0%, 96%, 0.5);
+
+  --color-bg-overlay: #292929;
+  --color-bg-card: rgb(209, 204, 204);
+  --color-bg-backcard: #bdbdbd;
+
+  --color-table-head: #afaa9b;
+  --color-table-row: rgb(231, 204, 181);
+  --color-table-scroll: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+  --shadow-card: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+  --shadow-title-card: 0px 0px 10px 7px rgba(0, 0, 0, 0.3);
+}

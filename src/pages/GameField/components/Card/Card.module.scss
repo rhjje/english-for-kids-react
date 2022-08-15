@@ -21,15 +21,15 @@
   width: 100%;
   height: 100%;
   border-radius: 30px;
-  border: 2px dashed rgba(0, 0, 0, 0.5);
+  border: 2px dashed var(--color-border-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(209, 204, 204);
+  background-color: var(--color-bg-card);
   transition: 1s;
   backface-visibility: hidden;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-card);
 }
 
 .Image {
@@ -39,7 +39,7 @@
   user-select: none;
   z-index: 2;
   transition: 0.5s;
-  background-color: rgb(209, 204, 204);
+  background-color: var(--color-bg-card);
 
   img {
     width: auto;
@@ -63,7 +63,7 @@
 }
 
 .BackSide {
-  background-color: #bdbdbd;
+  background-color: var(--color-bg-backcard);
   transform: rotateY(180deg);
 }
 

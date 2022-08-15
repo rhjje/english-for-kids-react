@@ -15,13 +15,13 @@
 
 .Table {
   width: 80vw;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border-card);
 }
 
 .TableHeader {
   width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--color-border-card);
+  box-shadow: var(--shadow-card);
   border-collapse: collapse;
 
   .Cell {
@@ -34,8 +34,8 @@
 }
 
 .TableHead {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  background-color: #afaa9b;
+  border-bottom: 1px solid var(--color-border-card);
+  background-color: var(--color-table-head);
 }
 
 .Main {
@@ -49,7 +49,7 @@
 }
 
 .MainTableBody:nth-child(2n + 1) {
-  background-color: rgb(231, 204, 181);
+  background-color: var(--color-table-row);
 }
 
 .Cell {
@@ -79,11 +79,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--color-table-scroll);
 }
 
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--color-table-scroll);
 }
 
 @media screen and (max-height: 700px) {

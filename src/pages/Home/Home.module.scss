@@ -86,7 +86,7 @@
   display: flex;
   justify-content: center;
   transition: 0.3s;
-  box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-title-card);
   img {
     width: auto;
     height: 100%;
@@ -123,7 +123,7 @@
   .Image {
     width: 185px;
     height: 185px;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-card);
   }
 
   .MenuItem:first-child {
