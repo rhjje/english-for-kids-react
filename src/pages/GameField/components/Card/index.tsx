@@ -1,6 +1,9 @@
 import { useState, MouseEvent } from 'react';
 import classNames from 'classnames';
-import { countingStatistics } from 'utils/countingStatistics';
+import {
+  countingStatistics,
+  StatisticsCategory,
+} from 'utils/countingStatistics';
 import styles from './Card.module.scss';
 
 interface CardProps {
@@ -29,7 +32,7 @@ export const Card = ({
   const handleClickCard = (event: MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
     if (target.localName !== 'button' && !gameMode) {
-      countingStatistics(word, 'clicks');
+      countingStatistics(word, StatisticsCategory.Clicks);
       audio.play();
     }
   };

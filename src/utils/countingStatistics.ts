@@ -1,17 +1,26 @@
 import { StatisticsItem } from 'types/types';
 
-export const countingStatistics = (word: string, category: string) => {
+export enum StatisticsCategory {
+  Clicks = 'clicks',
+  Correct = 'correct',
+  Wrong = 'wrong',
+}
+
+export const countingStatistics = (
+  word: string,
+  category: StatisticsCategory,
+) => {
   const data = JSON.parse(localStorage.getItem('data') || '[]');
   data.forEach((item: StatisticsItem) => {
     if (item.word === word) {
       switch (category) {
-        case 'clicks':
+        case StatisticsCategory.Clicks:
           item.clicks += 1;
           break;
-        case 'correct':
+        case StatisticsCategory.Correct:
           item.correct += 1;
           break;
-        case 'wrong':
+        case StatisticsCategory.Wrong:
           item.wrong += 1;
           break;
         default:

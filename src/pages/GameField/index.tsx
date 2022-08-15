@@ -11,7 +11,10 @@ import { Nullable, Card as CardTypes } from 'types/types';
 import { Preloader } from 'components/Preloader';
 import styles from './GameField.module.scss';
 
-import { countingStatistics } from 'utils/countingStatistics';
+import {
+  countingStatistics,
+  StatisticsCategory,
+} from 'utils/countingStatistics';
 
 import data from '../../assets/JSON/cards.json';
 import { starWin, star } from 'assets/illustrations';
@@ -77,7 +80,10 @@ export const GameField = () => {
           card.style.filter = 'blur(5px)';
           card.parentElement?.classList.remove('active-card');
           correct.play();
-          countingStatistics(`${words[currentWord]}`, 'correct');
+          countingStatistics(
+            `${words[currentWord]}`,
+            StatisticsCategory.Correct,
+          );
 
           currentWord += 1;
           wordsUsed.push(card.getAttribute('data-name'));
@@ -99,7 +105,7 @@ export const GameField = () => {
         } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
           setStars((prevState) => [...prevState, false]);
           error.play();
-          countingStatistics(`${words[currentWord]}`, 'wrong');
+          countingStatistics(`${words[currentWord]}`, StatisticsCategory.Wrong);
           mistakes += 1;
         }
       });
