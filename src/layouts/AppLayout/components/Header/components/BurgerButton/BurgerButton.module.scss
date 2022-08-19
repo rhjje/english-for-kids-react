@@ -1,14 +1,27 @@
 .Button {
-  width: 40px;
+  width: 80px;
+  height: 80px;
   position: absolute;
-  left: -160px;
-  top: 30px;
-  margin-left: 200px;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 20px;
+  top: 15px;
   z-index: 20;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
   &:hover {
     cursor: pointer;
   }
+  &:focus-visible {
+    outline: var(--focus-outline)
+  }
+}
+
+.LinesWrapper {
+  overflow: hidden;
+  width: 40px;
 }
 
 .FirstLine,
@@ -20,6 +33,10 @@
   background-color: var(--color-whitesmoke);
   transition: 0.5s;
   border-radius: 1px;
+}
+
+.FirstLine {
+  margin-top: 0;
 }
 
 .ButtonActive {

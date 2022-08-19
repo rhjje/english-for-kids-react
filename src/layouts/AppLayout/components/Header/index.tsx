@@ -9,7 +9,7 @@ export const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <header>
+    <header className={styles.Header}>
       <BurgerButton
         onClick={() => setMenuIsOpen((prevState) => !prevState)}
         menuIsOpen={menuIsOpen}
