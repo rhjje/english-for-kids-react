@@ -9,18 +9,17 @@ interface BurgerMenuProps {
 }
 
 export const BurgerMenu = ({ menuIsOpen, closeMenu }: BurgerMenuProps) => {
-  const { escape } = useEscape(closeMenu);
   const classItem = classNames(styles.NavigationItem, {
     [styles.NavigationItemActive]: menuIsOpen,
   });
 
+  useEscape(closeMenu);
+
   return (
     <div
-      tabIndex={0}
       className={classNames(styles.BurgerMenu, {
         [styles.BurgerMenuActive]: menuIsOpen,
       })}
-      onKeyDown={escape}
     >
       <ul className={styles.Navigation}>
         <li className={classItem}>
