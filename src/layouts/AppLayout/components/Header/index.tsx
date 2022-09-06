@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { BurgerMenu } from './components/BurgerMenu';
 import { BurgerButton } from './components/BurgerButton';
@@ -26,7 +27,7 @@ export const Header = () => {
         closeMenu={() => setMenuIsOpen(false)}
       />
       <div
-        className={menuIsOpen ? styles.Bg : styles.BgDisabled}
+        className={classNames(styles.Bg, !menuIsOpen && styles.BgDisabled)}
         onClick={() => setMenuIsOpen(false)}
       />
     </header>
