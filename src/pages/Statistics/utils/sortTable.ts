@@ -11,17 +11,29 @@ export const sortTable = (
   const newData: StatisticsItem[] = JSON.parse(JSON.stringify(data));
 
   if (direction) {
-    newData.sort((a, b) =>
-      a[field as keyof StatisticsItem] >= b[field as keyof StatisticsItem]
-        ? 1
-        : -1,
-    );
+    newData.sort((a, b) => {
+      if (a[field as keyof StatisticsItem] > b[field as keyof StatisticsItem]) {
+        return 1;
+      }
+
+      if (a[field as keyof StatisticsItem] < b[field as keyof StatisticsItem]) {
+        return -1;
+      }
+
+      return 0;
+    });
   } else {
-    newData.sort((a, b) =>
-      a[field as keyof StatisticsItem] >= b[field as keyof StatisticsItem]
-        ? -1
-        : 1,
-    );
+    newData.sort((a, b) => {
+      if (a[field as keyof StatisticsItem] > b[field as keyof StatisticsItem]) {
+        return -1;
+      }
+
+      if (a[field as keyof StatisticsItem] < b[field as keyof StatisticsItem]) {
+        return 1;
+      }
+
+      return 0;
+    });
   }
 
   localStorage.setItem('data', JSON.stringify(newData));
