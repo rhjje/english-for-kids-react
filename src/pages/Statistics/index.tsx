@@ -50,33 +50,38 @@ export const Statistics = () => {
   const handleClickCell = (event: MouseEvent<HTMLTableCellElement>) => {
     const target = event.target as HTMLTableCellElement;
 
-    if (
-      tableData !== null &&
-      target.innerText.includes(tableData.activeCell.title)
-    ) {
-      setTableData((prevState) => ({
-        activeCell: {
-          ...prevState?.activeCell,
-          direction: !prevState?.activeCell.direction,
-        } as ActiveCell,
-        data: sortTable(
-          prevState?.data as StatisticsItem[],
-          prevState?.activeCell.title.toLowerCase() as string,
-          !prevState?.activeCell.direction as boolean,
-        ),
-      }));
+    if (tableData && target.innerText.includes(tableData.activeCell.title)) {
+      setTableData((prevState) => {
+        return prevState
+          ? {
+              activeCell: {
+                ...prevState.activeCell,
+                direction: !prevState?.activeCell.direction,
+              },
+              data: sortTable(
+                prevState.data,
+                prevState.activeCell.title.toLowerCase(),
+                !prevState.activeCell.direction,
+              ),
+            }
+          : null;
+      });
     } else {
-      setTableData((prevState) => ({
-        activeCell: {
-          title: target.innerText,
-          direction: true,
-        },
-        data: sortTable(
-          prevState?.data as StatisticsItem[],
-          target.innerText.toLowerCase(),
-          true,
-        ),
-      }));
+      setTableData((prevState) => {
+        return prevState
+          ? {
+              activeCell: {
+                title: target.innerText,
+                direction: true,
+              },
+              data: sortTable(
+                prevState.data,
+                target.innerText.toLowerCase(),
+                true,
+              ),
+            }
+          : null;
+      });
     }
   };
 
