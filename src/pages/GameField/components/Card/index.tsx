@@ -5,6 +5,7 @@ import {
   StatisticsCategory,
 } from 'utils/countingStatistics';
 import styles from './Card.module.scss';
+import './Card.module.scss';
 
 interface CardProps {
   word: string;
@@ -39,7 +40,7 @@ export const Card = ({
 
   return (
     <div
-      className={styles.Card}
+      className={classNames(styles.Card, 'active-card')}
       onMouseLeave={() => setFlipped(false)}
       style={{ transform: rotation }}
     >

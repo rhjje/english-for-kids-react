@@ -56,15 +56,15 @@ export const GameField = () => {
     }
   }, [gameMode]);
 
-  const playGame = () => {
-    const words: string[] = cards!
+  const playGame = (cards: CardTypes[]) => {
+    const words: string[] = cards
       .map((card) => card.word)
       .sort(() => Math.random() - 0.5);
 
     let currentWord = 0;
     let mistakes = 0;
 
-    const wordsUsed: Nullable<string>[] = [];
+    const wordsUsed: string[] = [];
 
     const sayWord = () => {
       const currentAudio = new Audio(`./sounds/${words[currentWord]}.mp3`);
@@ -80,13 +80,15 @@ export const GameField = () => {
           card.style.filter = 'blur(5px)';
           card.parentElement?.classList.remove('active-card');
           correct.play();
+
           countingStatistics(
             `${words[currentWord]}`,
             StatisticsCategory.Correct,
           );
 
           currentWord += 1;
-          wordsUsed.push(card.getAttribute('data-name'));
+          wordsUsed.push(words[currentWord]);
+
           setStars((prevState) => [...prevState, true]);
 
           if (currentWord < words.length) {
@@ -98,11 +100,12 @@ export const GameField = () => {
               } else {
                 success.play();
               }
+
               dispatch(actions.setMistakes(mistakes));
               history.push('/final-page');
             }, 1000);
           }
-        } else if (!wordsUsed.includes(card.getAttribute('data-name'))) {
+        } else {
           setStars((prevState) => [...prevState, false]);
           error.play();
           countingStatistics(`${words[currentWord]}`, StatisticsCategory.Wrong);
@@ -113,9 +116,9 @@ export const GameField = () => {
   };
 
   const handleClickPlay = () => {
-    if (!repeat) {
+    if (!repeat && cards) {
       setRepeat(true);
-      playGame();
+      playGame(cards);
     } else {
       audio?.play();
     }

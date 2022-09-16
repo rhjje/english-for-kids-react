@@ -8,11 +8,16 @@
   align-items: center;
   justify-content: center;
   border-radius: 30px;
+  pointer-events: none;
 
   &:hover {
     cursor: pointer;
     transform: scale(1.1) !important;
   }
+}
+
+:global(.active-card) {
+  pointer-events: auto;
 }
 
 .FrontSide,
