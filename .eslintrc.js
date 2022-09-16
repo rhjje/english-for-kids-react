@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'react-app',
+  extends: ['react-app', 'react-app/jest'],
   plugins: ['eslint-plugin-import', 'prettier'],
   rules: {
     'no-console': [
