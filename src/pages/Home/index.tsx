@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
+import { StorageKeys } from 'utils/constants';
 import { Preloader } from 'components/Preloader';
 import data from '../../assets/JSON/cards.json';
 import styles from './Home.module.scss';
@@ -15,8 +16,8 @@ export const Home = () => {
   const [sections, setSections] = useState<Sections[]>([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem('sections')) {
-      const array = JSON.parse(sessionStorage.getItem('sections')!);
+    if (sessionStorage.getItem(StorageKeys.Sections)) {
+      const array = JSON.parse(sessionStorage.getItem(StorageKeys.Sections)!);
       setSections(array);
     } else {
       const links = Object.keys(data);
@@ -27,7 +28,7 @@ export const Home = () => {
         randomItem.key = uuidv4();
         return randomItem;
       });
-      sessionStorage.setItem('sections', JSON.stringify(array));
+      sessionStorage.setItem(StorageKeys.Sections, JSON.stringify(array));
       setSections(array);
     }
   }, []);

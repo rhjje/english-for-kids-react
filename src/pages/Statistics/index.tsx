@@ -3,7 +3,7 @@ import { Button } from 'components/Button';
 import { formingListWords } from './utils/formingListWords';
 import { sortTable } from './utils/sortTable';
 import { resetStorage } from './utils/resetStorage';
-import { defaultActiveCell } from 'utils/constants';
+import { defaultActiveCell, StorageKeys } from 'utils/constants';
 import { Nullable, ActiveCell, StatisticsItem } from 'types/types';
 import styles from './Statistics.module.scss';
 
@@ -27,9 +27,10 @@ export const Statistics = () => {
 
   useEffect(() => {
     const activeCell = JSON.parse(
-      localStorage.getItem('activeCell') || JSON.stringify(defaultActiveCell),
+      localStorage.getItem(StorageKeys.ActiveCell) ||
+        JSON.stringify(defaultActiveCell),
     );
-    const data = JSON.parse(localStorage.getItem('data') || '[]');
+    const data = JSON.parse(localStorage.getItem(StorageKeys.Data) || '[]');
 
     if (activeCell && data) {
       formingListWords();
@@ -43,7 +44,7 @@ export const Statistics = () => {
       activeCell: {
         ...prevState?.activeCell,
       } as ActiveCell,
-      data: JSON.parse(localStorage.getItem('data') || '[]'),
+      data: JSON.parse(localStorage.getItem(StorageKeys.Data) || '[]'),
     }));
   };
 

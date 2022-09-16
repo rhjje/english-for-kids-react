@@ -1,5 +1,5 @@
 import { Categories, StatisticsItem } from 'types/types';
-import { defaultActiveCell } from './constants';
+import { defaultActiveCell, StorageKeys } from './constants';
 import data from '../assets/JSON/cards.json';
 
 export const setLocalStorage = () => {
@@ -31,6 +31,9 @@ export const setLocalStorage = () => {
     statistics.push(currentObj);
   });
 
-  localStorage.setItem('data', JSON.stringify(statistics));
-  localStorage.setItem('activeCell', JSON.stringify(defaultActiveCell));
+  localStorage.setItem(StorageKeys.Data, JSON.stringify(statistics));
+  localStorage.setItem(
+    StorageKeys.ActiveCell,
+    JSON.stringify(defaultActiveCell),
+  );
 };

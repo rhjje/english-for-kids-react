@@ -1,8 +1,9 @@
 import { StatisticsItem } from 'types/types';
+import { StorageKeys } from 'utils/constants';
 
 export const formingListWords = () => {
   const data: StatisticsItem[] = JSON.parse(
-    localStorage.getItem('data') || '[]',
+    localStorage.getItem(StorageKeys.Data) || '[]',
   );
 
   data.sort((a, b) => (a.wrong > b.wrong ? -1 : 1));
@@ -12,5 +13,5 @@ export const formingListWords = () => {
     if (data[i].wrong > 0) array.push(data[i]);
   }
 
-  localStorage.setItem('difficult-words', JSON.stringify(array));
+  localStorage.setItem(StorageKeys.DifficultWords, JSON.stringify(array));
 };

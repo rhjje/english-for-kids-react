@@ -1,4 +1,5 @@
 import { StatisticsItem } from 'types/types';
+import { StorageKeys } from './constants';
 
 export enum StatisticsCategory {
   Clicks = 'clicks',
@@ -10,7 +11,7 @@ export const countingStatistics = (
   word: string,
   category: StatisticsCategory,
 ) => {
-  const data = JSON.parse(localStorage.getItem('data') || '[]');
+  const data = JSON.parse(localStorage.getItem(StorageKeys.Data) || '[]');
   data.forEach((item: StatisticsItem) => {
     if (item.word === word) {
       switch (category) {
@@ -34,5 +35,5 @@ export const countingStatistics = (
       }
     }
   });
-  localStorage.setItem('data', JSON.stringify(data));
+  localStorage.setItem(StorageKeys.Data, JSON.stringify(data));
 };

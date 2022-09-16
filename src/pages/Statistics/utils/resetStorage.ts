@@ -1,8 +1,9 @@
 import { StatisticsItem } from 'types/types';
+import { StorageKeys } from 'utils/constants';
 
 export const resetStorage = () => {
   const data: StatisticsItem[] = JSON.parse(
-    localStorage.getItem('data') || '[]',
+    localStorage.getItem(StorageKeys.Data) || '[]',
   );
 
   const resetArray = data.map((item: StatisticsItem) => ({
@@ -16,6 +17,6 @@ export const resetStorage = () => {
     image: item.image,
   }));
 
-  localStorage.setItem('data', JSON.stringify(resetArray));
-  localStorage.setItem('difficult-words', '[]');
+  localStorage.setItem(StorageKeys.Data, JSON.stringify(resetArray));
+  localStorage.setItem(StorageKeys.DifficultWords, '[]');
 };

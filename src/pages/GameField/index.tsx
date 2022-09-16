@@ -9,6 +9,7 @@ import { ButtonPlay } from './components/ButtonPlay';
 import { Button } from 'components/Button';
 import { Nullable, Card as CardTypes } from 'types/types';
 import { Preloader } from 'components/Preloader';
+import { StorageKeys } from 'utils/constants';
 import styles from './GameField.module.scss';
 
 import {
@@ -43,7 +44,9 @@ export const GameField = () => {
 
   useEffect(() => {
     if (id === 'repeat-difficult-words') {
-      setCards(JSON.parse(localStorage.getItem('difficult-words') || '[]'));
+      setCards(
+        JSON.parse(localStorage.getItem(StorageKeys.DifficultWords) || '[]'),
+      );
     } else {
       setCards(data[id as keyof typeof data]);
     }

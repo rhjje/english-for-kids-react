@@ -1,4 +1,5 @@
 import { StatisticsItem } from 'types/types';
+import { StorageKeys } from 'utils/constants';
 
 const capitalize = (string: string) =>
   string[0].toUpperCase() + string.slice(1);
@@ -36,9 +37,9 @@ export const sortTable = (
     });
   }
 
-  localStorage.setItem('data', JSON.stringify(newData));
+  localStorage.setItem(StorageKeys.Data, JSON.stringify(newData));
   localStorage.setItem(
-    'activeCell',
+    StorageKeys.ActiveCell,
     JSON.stringify({ title: capitalize(field), direction }),
   );
 
