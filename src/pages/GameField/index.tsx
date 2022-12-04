@@ -80,7 +80,6 @@ export const GameField = () => {
     cardsRefs.current.forEach((card) => {
       card.addEventListener('click', () => {
         if (card.getAttribute('data-name') === words[currentWord]) {
-          card.style.filter = 'blur(5px)';
           card.parentElement?.classList.remove('active-card');
           correct.play();
 
